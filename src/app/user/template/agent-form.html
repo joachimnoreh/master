@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="./agent.css">
+<form>
+<span class="agentFormInput">
+	<!--<label for="lastname">Nom</label>-->
+	<input type="text" class="form-control" id="lastname"
+         required placeholder="Nom"
+         [(ngModel)]="agent.nom" name="lastname">
+  <!--<div [hidden]="lastname.valid || lastname.pristine"
+           class="alert alert-danger">
+        Le nom est obligatoire
+      </div>-->
+</span>
+  <span class="agentFormInput">
+	<!--<label for="firstname">Prenom</label>-->
+	<input type="text" class="form-control" id="firstname"
+         required placeholder="Prenom"
+         [(ngModel)]="agent.prenom" name="firstname">
+</span>
+  <span class="agentFormInput">
+	<!--<label for="matricule">Matricule</label>-->
+	<input type="text" class="form-control" id="matricule"
+         required placeholder="Matricule"
+         [(ngModel)]="agent.matricule" name="matricule">
+</span>
+  <span class="agentFormInput">
+	<!--<label for="identifiant">Identifiant</label>-->
+	<input type="text" class="form-control" id="identifiant"
+         required placeholder="Identifiant"
+         [(ngModel)]="agent.identifiant" name="identifiant">
+</span>
+  <span class="agentFormInput">
+	<!--<label for="mdp">Mdp</label>
+	<input type="text"  class="form-control" id="mdp"
+       required placeholder="Mot de passe"
+       [(ngModel)]="agent.mdp" name="mdp">
+</span>
+<span class="agentFormInput">
+	<!--<label for="lastname">position</label>-->
+	<input type="text" class="form-control" id="position"
+         required
+         [(ngModel)]="agent.position" name="position">
+</span>
+  <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="createAgent(); reset()"></button>
+  <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="reset()"></button>
+</form>
+

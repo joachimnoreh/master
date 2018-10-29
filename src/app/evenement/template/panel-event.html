@@ -1,0 +1,31 @@
+<!--  <h2>Site </h2>
+<ul class="sites">
+<li *ngFor="let site of sites" (click)="onSelect(site)">
+<label>{{site.name}}</label>
+</li>
+<li *ngFor="let places of siteplaces">
+<label>{{places.name}}</label>
+</li>-->
+
+
+<div class="panel panel-primary" id="panel-agent">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{eventModel.name}}</h3>
+  </div>
+  <div class="panel-body">
+    <div *ngFor="line of eventModel.lines">
+
+      <div class="col-md-12">
+        <div *ngIf="line.input">
+          {{line.composant[0].label}}
+        </div>
+
+        <event-line-form [line]="line"></event-line-form>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!--</ul>-->
