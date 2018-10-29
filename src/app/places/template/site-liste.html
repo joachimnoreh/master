@@ -1,0 +1,39 @@
+<!--  <h2>Site </h2>
+<ul class="sites">
+<li *ngFor="let site of sites" (click)="onSelect(site)">
+<label>{{site.name}}</label>
+</li>
+<li *ngFor="let places of siteplaces">
+<label>{{places.name}}</label>
+</li>-->
+
+<link rel="stylesheet" href="./lieu.css">
+<div class="col-md-9" id="planel-lieu-gauche">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Liste des Lieux</h3>
+    </div>
+
+    <div class="panel-body">
+      <div *ngIf="site.placeRoot">
+        <place-detail [level]="0" [placeId]="site.placeRoot"></place-detail>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-3" id="planel-lieu-droite">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Ajout <span *ngIf="placeSelectionner">{{placeSelectionner.name}}</span></h3>
+    </div>
+    <div class="panel-body">
+      <div *ngIf="placeSelectionner">
+        <add-place [level]="level" [placeSelectionner]="placeSelectionner"></add-place>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--</ul>-->
