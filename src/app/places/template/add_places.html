@@ -1,0 +1,43 @@
+ <div *ngIf="placeCreated">
+	<div *ngFor="let errorMessage of errorMessages" class="alert alert-danger" role="alert">
+	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	  <span class="sr-only">Error:</span>
+	   {{errorMessage}}
+	</div>
+	  <div *ngIf="getEditable()" class="input-group">
+	  	<div><span class="panel panel-info" data-toggle="collapse" data-target="#ajoutSimpleEdition" aria-expanded="false" aria-controls="collapseExample" >Ajout simple</span></div>
+	  	<div class="collapse in" id="ajoutSimpleEdition" >
+	  	  <div>
+	  	  <input id="valueNom" type="text" placeholder="Nom" class="form-control bottom-minus-one" [(ngModel)]="placeCreated.name" >
+	  	  </div>
+		  <div class="input-group-btn">
+		    <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="valider()"></button>
+		    <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="annuler()"></button>
+		  </div>
+		</div>
+	</div>
+	<div *ngIf="getEditable()" class="input-group">
+		<div><span class="panel panel-info" data-toggle="collapse" data-target="#ajoutMultipleEdition" aria-expanded="false" aria-controls="collapseExample" >Ajout multiple</span></div>
+		<div class="collapse" id="ajoutMultipleEdition" >
+			<div>
+			<input id="valueName" type="text" placeholder="Mininum [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="multipleName" >
+			 </div>
+			 <div>
+			  <label for="valueMin" >de</label>
+			  
+			  <input id="valueMin" type="text" placeholder="Mininum [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="min" >
+			</div>
+			<div>
+			  <label for="valueMax" >à</label>
+			   
+			
+			  <input id="valueMax" type="text" placeholder="Max  [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="max" >
+			</div>
+			  <div class="input-group-btn">
+			    <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="valider()"></button>
+			    <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="annuler()"></button>
+			  </div>
+			</div>
+	</div>
+	
+</div>

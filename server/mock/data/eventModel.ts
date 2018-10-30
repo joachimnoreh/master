@@ -1,4 +1,4 @@
-import { LINE_MODELS } from './line-model'; 
+import { LINE_MODELS } from './line-model';
 import { SITES } from './site';
 import {EventModel} from '../../../src/app/evenement/models/eventModel';
 

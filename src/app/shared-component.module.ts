@@ -18,6 +18,7 @@ import {EditComponentModelComponent} from './evenement/edit-component-model.comp
 import {NotFoundComponent} from './error/not-found.component';
 import {EventModelService} from './evenement/services/event.model.service';
 import {CommunicationService} from './places/services/communication.service';
+import {GlobalService} from './common/services/global.service';
 
 
 @NgModule({
@@ -44,8 +45,8 @@ import {CommunicationService} from './places/services/communication.service';
     CommunicationService,
     CommunicationUserService,
     CommunicationEditionEventService,
-    EventModelService
-
+    EventModelService,
+    GlobalService
   ],
   exports: [
     PlaceDetailComponent,

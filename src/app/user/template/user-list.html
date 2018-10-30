@@ -8,22 +8,22 @@
 </li>-->
 
 <div class="col-md-12">
-  <div class="panel panel-primary" id="panel-agent">
+  <div class="panel panel-primary" id="panel-user">
     <div class="panel-heading">
-      <h3 class="panel-title">Liste des agents</h3>
+      <h3 class="panel-title">Liste des users</h3>
     </div>
     <div class="panel-body">
-      <div *ngFor="let currentAgent of agents">
-        <div class="agentElement">
+      <div *ngFor="let currentUser of users">
+        <div class="userElement">
 
-          <agent-form [agent]="currentAgent"></agent-form>
+          <user-form [user]="currentUser"></user-form>
 
         </div>
 
       </div>
 
-      <div class="agentAdd">
-        <agent-form></agent-form>
+      <div class="userAdd">
+        <user-form></user-form>
 
       </div>
 

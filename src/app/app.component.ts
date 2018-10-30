@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import {PlaceService} from './places/services/place.service';
+import {SiteService} from './places/services/site.service';
+import {GlobalService} from './common/services/global.service';
+import {UserService} from './user/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor( private globalService: GlobalService) {
+  }
+
   title = 'FreeMCI';
 }

@@ -8,7 +8,7 @@ import {EVENT_MODELS} from '../../../server/mock/data/eventModel';
 
 @Component({
   selector: 'edition-model-event',
-  templateUrl: '../template/panel-model-event.html'
+  templateUrl: './template/panel-model-event.html'
 
 })
 export class EditionModelEvenementComponent {
@@ -18,7 +18,7 @@ export class EditionModelEvenementComponent {
   private eventModels: EventModel[];
 
   constructor(private eventModelService: EventModelService, private communicationEditionEventService: CommunicationEditionEventService) {
-    this.eventModelService.getAllEvenementModele().then((eventModels: EventModel[]) => {
+    this.eventModelService.getAllEvenementModele().subscribe((eventModels: EventModel[]) => {
       this.eventModel = new EventModel();
       this.eventModels = eventModels;
     });
@@ -27,7 +27,7 @@ export class EditionModelEvenementComponent {
 
 
   addLine(ordre: number): void {
-    var lineModel = new LineModel();
+    const lineModel = new LineModel();
     lineModel.name = '';
     lineModel.input = true;
     lineModel.elements = new Array<ComposantModel>();
@@ -38,7 +38,7 @@ export class EditionModelEvenementComponent {
   }
 
   addTitleLine(): void {
-    var lineModel = new LineModel();
+    const lineModel = new LineModel();
     lineModel.name = 'Title';
     lineModel.input = false;
     lineModel.ordre = this.eventModel.lines.length;

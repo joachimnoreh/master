@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from './models/user';
 import {UserService} from './services/user.service';
 
@@ -8,7 +8,7 @@ import {UserService} from './services/user.service';
   templateUrl: './template/user-form.html'
 })
 
-export class UserFormComponent {
+export class UserFormComponent implements OnInit{
 
 
   @Input() user: User;
@@ -22,7 +22,7 @@ export class UserFormComponent {
   createUser(): void {
 
     this.userService.createUser(this.user)
-      .then(user => {
+      .subscribe((user: User) => {
         console.log(user);
       });
   }

@@ -6,23 +6,21 @@ import {PlaceService} from './services/place.service';
 
 @Component({
   selector: 'place-detail',
-  templateUrl: './detail_place.html'
+  templateUrl: './template/detail_place.html'
 })
 export class PlaceDetailComponent implements OnInit {
 
   const;
   showPlaceCreation = false;
-  @Input() placeId: string;
+  @Input() selectedPlace: Place;
   @Input() level: number;
   edit: boolean;
   expanded = false;
   places: Place[];
-  selectedPlace: Place;
   placeCreated: Place;
 
   constructor(private placeService: PlaceService,
-              private communicationService: CommunicationService,
-              private  globalService: GlobalService) {
+              private communicationService: CommunicationService) {
 
   }
 
@@ -31,12 +29,8 @@ export class PlaceDetailComponent implements OnInit {
     this.edit = false;
   }
 
-  getPlace(): void {
-    console.log('placeId :: ' + this.placeId);
-    this.placeService.getPlace(this.placeId).then(place => {
-      console.log(place);
-      this.selectedPlace = place;
-    }).catch(this.handleError);
+  getPlace(): Place {
+    return this.selectedPlace;
 
   }
 
@@ -57,7 +51,7 @@ export class PlaceDetailComponent implements OnInit {
      this.placeCreated = new Place('Nouveau lieu',globalService.getSite());
    }*/
   validateChange() {
-    this.placeService.update(this.selectedPlace).then(place => this.selectedPlace = place);
+    this.placeService.update(this.selectedPlace).subscribe((place: Place) => this.selectedPlace = place);
     this.setEdition(false);
     console.log('selected place apres changement' + this.selectedPlace);
   }

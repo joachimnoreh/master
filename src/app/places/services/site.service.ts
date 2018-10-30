@@ -7,8 +7,8 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class SiteService {
 
-  private urlFindAll = '/findAllSite/';
-  private urlGetPlace = '/findAllSite/';
+  private urlFindAll = 'findAllSite/';
+  private urlGetPlace = 'findAllSite/';
   private _headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {

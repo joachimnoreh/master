@@ -1,35 +1,37 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import {Place} from '../models/place';
 import {Observable} from 'rxjs';
+import {GlobalService} from '../../common/services/global.service';
+import {User} from '../../user/models/user';
 
 @Injectable()
 export class PlaceService {
 
-  private findPlaceUrl = '/mci/findPlace/';
-  private updatePlaceUrl = '/mci/updatePlace/';
-  private createPlaceUrl = '/mci/createPlace/';
-  private headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-  constructor(private http: HttpClient) {
+  private findPlaceUrl = '/findPlace/';
+  private updatePlaceUrl = '/updatePlace/';
+  private createPlaceUrl = '/createPlace/';
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  constructor(private http: HttpClient, private globalService: GlobalService) {
   }
 
-  getPlace(placeId: string): Promise<Place> {
-    return null;
-
-  }
+  getPlace(placeId: string): Place {
+    return this.globalService.getSite().placeRoot;
+      }
 
   update(place: Place): Observable<Place> {
     const url = this.updatePlaceUrl;
-    return this.http.post<Place>(url, JSON.stringify(place), {HttpHeaders: this.headers});
+    return this.http.post<Place>(url, JSON.stringify(place),  this.httpOptions );
+
 
   }
 
   createPlace(place: Place): Observable<Place> {
     const url = this.createPlaceUrl;
     // return this.http.post(url,JSON.stringify(place),)
-    return this.http.post<Place>(url, 'JSON.stringify(place)', {HttpHeaders: this.headers});
-
+    return this.http.post<Place>(url, 'JSON.stringify(place)', this.httpOptions);
 
   }
 

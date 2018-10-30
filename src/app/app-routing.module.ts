@@ -7,10 +7,10 @@ import {UserListComponent} from './user/user-list.component';
 import {SharedComponentModule} from './shared-component.module';
 
 const routes: Routes = [
-  { path: 'agents', component: UserListComponent },
+  { path: 'users', component: UserListComponent, pathMatch: 'full' },
   { path: 'places', component: SiteListComponent },
   { path: 'editionEvenement', component: EditionModelEvenementComponent },
-  { path: '', redirectTo: '/agents', pathMatch: 'full' },
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
 

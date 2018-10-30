@@ -7,7 +7,7 @@
 <label>{{places.name}}</label>
 </li>-->
 
-<link rel="stylesheet" href="./lieu.css">
+<link rel="stylesheet" href="../../../assets/place.scss">
 <div class="col-md-9" id="planel-lieu-gauche">
 
   <div class="panel panel-primary">
@@ -16,8 +16,8 @@
     </div>
 
     <div class="panel-body">
-      <div *ngIf="site.placeRoot">
-        <place-detail [level]="0" [placeId]="site.placeRoot"></place-detail>
+      <div *ngIf="site && site.placeRoot">
+        <place-detail [level]="0" [selectedPlace]="site.placeRoot"></place-detail>
       </div>
     </div>
   </div>

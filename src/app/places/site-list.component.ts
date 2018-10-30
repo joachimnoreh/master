@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Site} from './models/site';
 import {SiteService} from './services/site.service';
 import {GlobalService} from '../common/services/global.service';
@@ -10,17 +10,17 @@ import {Place} from './models/place';
   templateUrl: './template/site-liste.html'
 
 })
-export class SiteListComponent {
+export class SiteListComponent implements OnInit {
 
   site: Site;
   showPlaceCreation = false;
   placeSelectionner: Place;
   level: number;
 
-  constructor(private  globalService: GlobalService,
-              private siteService: SiteService,
-              private  communicationService: CommunicationService) {
-    this.site = globalService.getSite();
+  constructor(
+    private siteService: SiteService,
+    private  globalService: GlobalService,
+    private  communicationService: CommunicationService) {
     communicationService.placeSelected$.subscribe((placeAndLevel: any) => this.onPlaceSelected(placeAndLevel));
   }
 
@@ -29,9 +29,17 @@ export class SiteListComponent {
     this.level = couple[1];
   }
 
-  /*ngOnInit(): void {
-   this.initSite();
-  }*/
+  private getSite(): void {
+    this.siteService.getAllSite().subscribe((sites: Site[]) => {
+      console.log('sites GS' + sites);
+      this.site = sites[0];
+      console.log('Const-site' + this.site._id);
+    });
+  }
+
+  ngOnInit(): void {
+  this.getSite();
+  }
 
 }
 

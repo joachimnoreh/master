@@ -7,21 +7,21 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class UserService {
 
-  private userUrl = '/mci/users/';
-  private findUserUrl = '/mci/findUser/';
-  private updateUserUrl = '/mci/updateUser/';
-  private createUserUrl = '/mci/createUser/';
+  private userUrl = '/users/';
+  private findUserUrl = 'findUser/';
+  private updateUserUrl = 'updateUser/';
+  private createUserUrl = 'createUser/';
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
   }
 
-  getAllUsers(forSite: Site) {
+  getAllUsers(forSite: Site): Observable<User[]> {
     const url = this.findUserUrl;
     const config = {
       params: {site: forSite._id}
     };
-    return this.http.get(url, config);
+    return this.http.get<User[]>(url, config);
   }
 
   update(user: User): Observable<User> {
