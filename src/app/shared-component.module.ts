@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {CommunicationEditionEventService} from './evenement/services/communication.edition.event.service';
 import {UserListComponent} from './user/user-list.component';
@@ -25,6 +25,7 @@ import {GlobalService} from './common/services/global.service';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   declarations: [

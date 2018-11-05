@@ -1,13 +1,17 @@
 <ul class="places">
   <li *ngFor="let place of places">
     <label>{{place.name}}</label>
-    <button (click)="showCreation(place)">Add</button>
+    <button (click)="showCreation(place)">
+    </button>
   </li>
 </ul>
 <div *ngIf="showPlaceCreation">
   <place-detail [place]="SelectedPlace"></place-detail>
   <label for="name">name: </label>
-  <input [(ngModel)]="placeCreated.name" placeholder="name">
-  <button (click)="valider()">Valider</button>
-</div>
+  <input [(ngModel)]="newPlace.name" placeholder="name">
+
+  <button (click)="validate()">
+    <i class="fas fa-check"></i>
+  </button>
+
 </div>

@@ -34,8 +34,8 @@ export class UserListComponent implements OnInit {
   }
 
   private getSite(): void {
-    this.siteService.getAllSite().subscribe((sites: Site[]) => {
-      this.site = sites[0];
+    this.siteService.getSite().subscribe((site: Site) => {
+      this.site = site;
       this.getListUser();
     });
   }

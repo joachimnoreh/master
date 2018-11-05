@@ -1,7 +1,6 @@
-#planel-lieu-gauche{
-	width:69%;
-	height:100%;
-	float:left;
+#place-liste-panel{
+  overflow-y: auto;
+  height: 440px;
 }
 #planel-lieu-droite{
 	width:29%;
@@ -11,7 +10,7 @@
 }
 .deactivate-input-bootstrap-css{
 	cursor:default;
-	
+
 }
 .place-row{
 	float:right;
@@ -35,6 +34,18 @@
 .place-row-lvl-5{
 	width:50%;
 }
-.bottom-minus-one{
-	bottom:-1;
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.chevron-place{
+  float:right;
+}
+.btn-place-action{
+  width: 48%;
+  margin-left: 1px;
 }

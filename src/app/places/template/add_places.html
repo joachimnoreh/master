@@ -1,43 +1,59 @@
- <div *ngIf="placeCreated">
-	<div *ngFor="let errorMessage of errorMessages" class="alert alert-danger" role="alert">
-	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	  <span class="sr-only">Error:</span>
-	   {{errorMessage}}
-	</div>
-	  <div *ngIf="getEditable()" class="input-group">
-	  	<div><span class="panel panel-info" data-toggle="collapse" data-target="#ajoutSimpleEdition" aria-expanded="false" aria-controls="collapseExample" >Ajout simple</span></div>
-	  	<div class="collapse in" id="ajoutSimpleEdition" >
-	  	  <div>
-	  	  <input id="valueNom" type="text" placeholder="Nom" class="form-control bottom-minus-one" [(ngModel)]="placeCreated.name" >
-	  	  </div>
-		  <div class="input-group-btn">
-		    <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="valider()"></button>
-		    <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="annuler()"></button>
-		  </div>
-		</div>
-	</div>
-	<div *ngIf="getEditable()" class="input-group">
-		<div><span class="panel panel-info" data-toggle="collapse" data-target="#ajoutMultipleEdition" aria-expanded="false" aria-controls="collapseExample" >Ajout multiple</span></div>
-		<div class="collapse" id="ajoutMultipleEdition" >
-			<div>
-			<input id="valueName" type="text" placeholder="Mininum [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="multipleName" >
-			 </div>
-			 <div>
-			  <label for="valueMin" >de</label>
-			  
-			  <input id="valueMin" type="text" placeholder="Mininum [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="min" >
-			</div>
-			<div>
-			  <label for="valueMax" >à</label>
-			   
-			
-			  <input id="valueMax" type="text" placeholder="Max  [a-Z A-Z 0-9]" class="form-control bottom-minus-one" [(ngModel)]="max" >
-			</div>
-			  <div class="input-group-btn">
-			    <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="valider()"></button>
-			    <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="annuler()"></button>
-			  </div>
-			</div>
-	</div>
-	
+<div *ngIf="newPlace" class="container">
+  <div *ngFor="let errorMessage of errorMessages" class="alert alert-danger" role="alert">
+    <span aria-hidden="true"> ! </span>
+    <span class="sr-only">Error:</span>
+    {{errorMessage}}
+  </div>
+  <div class="row">
+
+    <div class="collapsed col" data-toggle="collapse" data-target="#ajoutSimpleEdition" aria-expanded="false"
+         aria-controls="ajoutSimpleEdition">Ajout simple
+    </div>
+    <div class="collapsed col" data-toggle="collapse" data-target="#ajoutMultipleEdition" aria-expanded="false"
+         aria-controls="ajoutMultipleEdition">Ajout multiple
+    </div>
+  </div>
+  <div *ngIf="getEditable()" class="accordion" id="accordionExample">
+    <form class="collapse show " #addPlaceForm="ngForm" (ngSubmit)="validateOne()" id="ajoutSimpleEdition" data-parent="#accordionExample">
+      <div>
+        <label>
+          Name
+        <input id="valueNom" type="text" placeholder="Nom" class="form-control bottom-minus-one" [(ngModel)]="newPlace.name" name="name" required>
+        </label>
+      </div>
+      <div class="input-group-btn">
+        <button type="submit" class="  btn btn-default" [disabled]="!addPlaceForm.valid">
+          <i class="fas fa-check"></i>
+        </button>
+        <button type="button" class="  btn btn-default" (click)="annuler()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </form>
+    <form #addFloorForm="ngForm" (ngSubmit)="validateOne()" class="collapse" id="ajoutMultipleEdition" data-parent="#accordionExample" >
+      <div>
+        <label for="valueName">Nom</label>
+        <input id="valueName" type="text" placeholder="Nom" class="form-control bottom-minus-one"
+               [(ngModel)]="newPlace.name" name="name" equired>
+      </div>
+      <div>
+        <label for="valueMin">de</label>
+        <input id="valueMin" type="text" placeholder="Mininum [a-Z A-Z 0-9]" class="form-control bottom-minus-one"
+               disabled required>
+      </div>
+      <div>
+        <label for="valueMax">à</label>
+        <input id="valueMax" type="text" placeholder="Max  [a-Z A-Z 0-9]" class="form-control bottom-minus-one"
+             disabled required>
+      </div>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default" (click)="validate()" [disabled]="!addFloorForm.valid">
+          <i class="fas fa-check"></i>
+        </button>
+        <button type="button" class="btn btn-default" (click)="annuler()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

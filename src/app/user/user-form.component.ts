@@ -8,11 +8,12 @@ import {UserService} from './services/user.service';
   templateUrl: './template/user-form.html'
 })
 
-export class UserFormComponent implements OnInit{
+export class UserFormComponent implements OnInit {
 
 
   @Input() user: User;
-
+  userSave: User;
+  edit = false;
   submitted = false;
 
   constructor(private userService: UserService) {
@@ -20,28 +21,35 @@ export class UserFormComponent implements OnInit{
   }
 
   createUser(): void {
-
-    this.userService.createUser(this.user)
-      .subscribe((user: User) => {
-        console.log(user);
-      });
-  }
-
-  onSubmit() {
-    this.createUser();
-    this.reset();
+    if (this.user._id) {
+      this.userService.update(this.user)
+        .subscribe((user: User) => {
+          console.log(user);
+        });
+    } else {
+      this.userService.createUser(this.user)
+        .subscribe((user: User) => {
+          console.log(user);
+        });
+    }
   }
 
   reset() {
-
-    this.user = new User();
-
+    if (this.user._id) {
+      this.edit = false;
+      this.user = this.userSave;
+    } else {
+      this.user = new User();
+    }
   }
 
   ngOnInit() {
 
     if (this.user === undefined) {
       this.user = new User();
+      this.edit = true;
+    }else{
+      this.userSave = this.user;
     }
   }
 }

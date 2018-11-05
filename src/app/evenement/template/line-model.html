@@ -1,9 +1,8 @@
-<form class="col-md-12">
-  <div *ngFor="let component of lineModel.elements">
-    <div [ngSwitch]="component.type" class="col-md-{{component.width}}">
+<form class="lineModel row">
+  <div *ngFor="let component of lineModel.elements"  [ngSwitch]="component.type" class="col-xl-{{component.width}} ">
       <label><label *ngIf="component.mandatory">*</label>{{component.label}}</label>
 
-      <div class="input-group col-md-12 {{(component == selectedElement )?'has-success':''}}">
+      <div class="input-group col-xl-12 {{(component == selectedElement )?'has-success':''}}">
         <input *ngSwitchCase="'simpleText'" type="text" class="form-control" title="{{component.help}}"
                [(ngModel)]="component.value" name="eventAttribute"/>
 
@@ -21,18 +20,23 @@
         <input *ngSwitchCase="'number'" type="text" class="form-control" title="{{component.help}}"
                [(ngModel)]="component.value" name="eventAttribute"/>
         <span *ngIf="!simulation" class="input-group-btn ">
-        			<button class="btn btn-default glyphicon glyphicon-pencil btn-to-adjust"
-                      (click)="setSelectedelement(component);" type="button"></button>
-        			 <button type="button" class="glyphicon glyphicon-plus btn btn-default btn-to-adjust"
-                       (click)="removeElement(component);"></button>
+        			<button class="btn btn-default"
+                      (click)="setSelectedelement(component);" type="button">
+               <i class="far fa-edit "></i>
+              </button>
+        			 <button type="button" class="btn btn-default"
+                       (click)="removeElement(component);">
+                 <i class="fas fa-times"></i>
+               </button>
       			</span>
       </div>
       <label *ngIf="component.mandatory" class="alert-danger">{{component.message}}</label>
     </div>
-  </div>
-  <div *ngIf=" number !== 12 && !simulation" class="col-md-1">
-    <label>Add</label>
-    <button type="button" class="glyphicon glyphicon-plus btn btn-default" (click)="addElement();"></button>
+
+  <div *ngIf=" number !== 12 && !simulation" class="col-xl-1" id="addComponent">
+   <button type="button" class="  btn btn-default" (click)="addElement();">
+     <i class="far fa-plus-square"></i>
+   </button>
   </div>
 </form>
 

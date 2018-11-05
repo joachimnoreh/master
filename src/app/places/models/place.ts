@@ -1,5 +1,5 @@
 export class Place {
-  static id: number = 1;
+  static id = 0;
   parent: Place;
   _id: string;
   name: string;

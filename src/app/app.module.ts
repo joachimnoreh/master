@@ -7,10 +7,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedComponentModule} from './shared-component.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UrlInterceptorService} from './common/services/url-interceptor.service';
+import {HeaderComponent} from './common/layout/header.component';
+import {FooterComponent} from './common/layout/footer.component';
+import {LayoutComponent} from './common/layout/layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LayoutComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,8 @@ import {UrlInterceptorService} from './common/services/url-interceptor.service';
     useClass: UrlInterceptorService,
     multi: true,
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [LayoutComponent]
 })
 export class AppModule {
 }

@@ -21,12 +21,12 @@ export class UserService {
     const config = {
       params: {site: forSite._id}
     };
-    return this.http.get<User[]>(url, config);
+    return this.http.get<User[]>(url);
   }
 
   update(user: User): Observable<User> {
     const url = this.updateUserUrl;
-    return this.http.post<User>(url, '{ update : ' + JSON.stringify(user) + '}', {headers: this.headers});
+    return this.http.post<User>(url, JSON.stringify(user), {headers: this.headers});
 
   }
 

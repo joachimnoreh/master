@@ -1,11 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-
+$fa-font-path: "./assets/fontawesome-5.4.2/webfonts";
+@import "./assets/fontawesome-5.4.2/scss/fontawesome";
+@import "./assets/fontawesome-5.4.2/scss/regular";
+@import "./assets/fontawesome-5.4.2/scss/solid";
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
 @import "./assets/configuration";
 @import "./assets/place";
 @import "./assets/user";
+@import "./assets/event";
 // Optional
 @import "../node_modules/bootstrap/scss/reboot";
 @import "../node_modules/bootstrap/scss/type";

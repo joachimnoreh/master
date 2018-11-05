@@ -3,14 +3,12 @@
 
 export class User {
   _id: string;
-  nom: string;
-  prenom: string;
+  lastname: string;
+  firstname: string;
   matricule: number;
-  // identifiant:string;
-  // mdp:string;
-  position: string;
-  present: boolean;
-  //__v:number;
+  email:string;
+  role: string;
+  //present: boolean;
   //site:Site;
 
   constructor() {

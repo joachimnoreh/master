@@ -14,7 +14,7 @@ export class SiteListComponent implements OnInit {
 
   site: Site;
   showPlaceCreation = false;
-  placeSelectionner: Place;
+  selectedPlace: Place;
   level: number;
 
   constructor(
@@ -25,16 +25,14 @@ export class SiteListComponent implements OnInit {
   }
 
   private onPlaceSelected(couple: any) {
-    this.placeSelectionner = couple[0];
+    this.selectedPlace = couple[0];
     this.level = couple[1];
   }
 
   private getSite(): void {
-    this.siteService.getAllSite().subscribe((sites: Site[]) => {
-      console.log('sites GS' + sites);
-      this.site = sites[0];
-      console.log('Const-site' + this.site._id);
-    });
+    this.siteService.getSite().subscribe((site: Site) => {
+      this.site = site;
+     });
   }
 
   ngOnInit(): void {

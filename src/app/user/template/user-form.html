@@ -1,46 +1,56 @@
-<link rel="stylesheet" href="../../../assets/user.scss">
-<form>
-<span class="userFormInput">
+
+<form #userForm="ngForm" (ngSubmit)="createUser()">
+  <div class="row">
+<div class="col-xl-2">
 	<!--<label for="lastname">Nom</label>-->
 	<input type="text" class="form-control" id="lastname"
-         required placeholder="Nom"
-         [(ngModel)]="user.nom" name="lastname">
+         required placeholder="lastname"
+         [(ngModel)]="user.lastname" name="lastname"  [disabled]="!edit">
   <!--<div [hidden]="lastname.valid || lastname.pristine"
            class="alert alert-danger">
         Le nom est obligatoire
       </div>-->
-</span>
-  <span class="userFormInput">
+</div>
+  <div class="col-xl-2">
 	<!--<label for="firstname">Prenom</label>-->
 	<input type="text" class="form-control" id="firstname"
-         required placeholder="Prenom"
-         [(ngModel)]="user.prenom" name="firstname">
-</span>
-  <span class="userFormInput">
+         required placeholder="firstname"
+         [(ngModel)]="user.firstname" name="firstname"  [disabled]="!edit">
+</div>
+  <div class="col-xl-2">
 	<!--<label for="matricule">Matricule</label>-->
 	<input type="text" class="form-control" id="matricule"
          required placeholder="Matricule"
-         [(ngModel)]="user.matricule" name="matricule">
-</span>
-  <span class="userFormInput">
+         [(ngModel)]="user.matricule" name="matricule"  [disabled]="!edit">
+</div>
+  <div class="col-xl-2">
 	<!--<label for="identifiant">Identifiant</label>-->
-	<input type="text" class="form-control" id="identifiant"
-         required placeholder="Identifiant"
-         [(ngModel)]="user.identifiant" name="identifiant">
-</span>
-  <span class="userFormInput">
+	<input type="text" class="form-control" id="email"
+         required placeholder="email"
+         [(ngModel)]="user.email" name="email"  [disabled]="!edit">
+</div>
+  <div class="col-xl-2">
 	<!--<label for="mdp">Mdp</label>
 	<input type="text"  class="form-control" id="mdp"
        required placeholder="Mot de passe"
        [(ngModel)]="user.mdp" name="mdp">
-</span>
-<span class="userFormInput">
+</div>
+<div class="col-xl-3">
 	<!--<label for="lastname">position</label>-->
-	<input type="text" class="form-control" id="position"
-         required
-         [(ngModel)]="user.position" name="position">
-</span>
-  <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="createUser(); reset()"></button>
-  <button type="button" class="glyphicon glyphicon-remove btn btn-default" (click)="reset()"></button>
+	<input type="text" class="form-control" id="role"
+         required  placeholder="role"
+         [(ngModel)]="user.role" name="role" [disabled]="!edit">
+</div>
+    <button *ngIf="!edit" type="button" class="btn btn-default" (click)="edit = true">
+      <i class="far fa-edit fa-lg"></i>
+    </button>
+  <button *ngIf="edit" type="submit" class="btn btn-default" [disabled]="!userForm.valid">
+    <i class="fas fa-check"></i>
+  </button>
+  <button *ngIf="edit" type="button" class="btn btn-default" (click)="reset()">
+    <i class="fas fa-times"></i>
+  </button>
+  
+  </div>
 </form>
 

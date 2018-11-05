@@ -1,29 +1,39 @@
 <div *ngIf="selectedPlace">
   <div class="place-row place-row-lvl-{{level}}" *ngIf="!(edit)">
 	<div class="input-group">
-		<div class="form-control bottom-minus-one deactivate-input-bootstrap-css" (click)="addSomething(selectedPlace)">
+		<div class="form-control bottom-minus-one deactivate-input-bootstrap-css" data-toggle="collapse" [attr.data-target]="'#row' +selectedPlace._id" aria-expanded="false" [attr.aria-controls]="selectedPlace._id" (click)="expanded = !expanded">
 		  	{{selectedPlace.name}}
-		</div>
-	  	<div class="input-group-btn">
-		  <button type="button" class="glyphicon glyphicon-pencil btn btn-default" (click)="setEdition(true)">
+      <div class="chevron-place" *ngIf="selectedPlace.placeChildren && selectedPlace.placeChildren.length > 0">
+      <i class="fas fa-angle-down fa-lg " *ngIf="(expanded)" ></i>
+      <i class="fas fa-angle-up fa-lg"   *ngIf="!(expanded)"> </i>
+      </div>
+      </div>
+	  	<div class="input-group-b tn">
+
+		  <button type="button" class="btn btn-default btn-place-action" (click)="setEdition(true)">
+        <i class="far fa-edit fa-lg"></i>
 		  </button>
-		  <button type="button" class="glyphicon glyphicon-chevron-down btn btn-default" data-toggle="collapse" [attr.data-target]="'#' +selectedPlace._id" aria-expanded="false" [attr.aria-controls]="selectedPlace._id" *ngIf="!(expanded) && selectedPlace.placeChildren.length > 0 " (click)="expanded = true">
-		  </button>
-		  <button type="button" class="glyphicon glyphicon-chevron-up btn btn-default" data-toggle="collapse" [attr.data-target]="'#' +selectedPlace._id" aria-expanded="false" [attr.aria-controls]="selectedPlace._id"  *ngIf="(expanded)" (click)="expanded = false"> 
-		  </button>
+        <button type="button" class="btn btn-default btn-place-action" (click)="addSomething(selectedPlace)">
+          <i class="far fa-plus-square fa-lg"></i>
+        </button>
+
   		</div>
 	</div>
   </div>
   <div class="place-row place-row-lvl-{{level}}" *ngIf="(edit)">
-		 <div class="input-group">
-	     <input  class="form-control bottom-minus-one" [(ngModel)]="selectedPlace.name">
-			  <div class="input-group-btn">
-			     <button  type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="validateChange(selectedPlace)"></button>
-		  		 <button  type="button" class="glyphicon glyphicon-remove btn btn-default"  (click)="setEdition(false)" ></button>
+		 <form #changePlaceNameForm="ngForm" (ngSubmit)="validateChange()" class="input-group">
+         <input  type="text" class="form-control bottom-minus-one" [(ngModel)]="selectedPlace.name" name="name" required >
+       <div class="input-group-btn">
+			     <button  type="submit" [disabled]="!changePlaceNameForm.valid" class="btn btn-default" >
+             <i class="fas fa-check fa-lg"></i>
+           </button>
+		  		 <button  type="button" class="btn btn-default"  (click)="setEdition(false)" >
+             <i class="fas fa-times"></i>
+           </button>
 			  </div>
-		</div>
+		</form>
   </div>
-    <div class="collapse" id="{{selectedPlace._id}}">
+    <div class="collapse" id="row{{selectedPlace._id}}">
 	   	<div *ngFor="let place of selectedPlace.placeChildren">
 	  	 	<place-detail [level]="getlevel()+1" [selectedPlace]="place"></place-detail>
 	  	</div>

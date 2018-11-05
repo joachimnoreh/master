@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Place} from './models/place';
 import {CommunicationService} from './services/communication.service';
-import {GlobalService} from '../common/services/global.service';
+import {FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PlaceService} from './services/place.service';
 
 @Component({
@@ -25,7 +25,6 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPlace();
     this.edit = false;
   }
 
@@ -43,21 +42,21 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   addSomething(place: Place) {
-    console.log('addsmtg ' + this.level);
     this.communicationService.select([place, this.level]);
   }
 
   /* initSelectedPlace(){
-     this.placeCreated = new Place('Nouveau lieu',globalService.getSite());
+     this.newPlace = new Place('Nouveau lieu',globalService.getSite());
    }*/
   validateChange() {
     this.placeService.update(this.selectedPlace).subscribe((place: Place) => this.selectedPlace = place);
     this.setEdition(false);
-    console.log('selected place apres changement' + this.selectedPlace);
-  }
+   }
 
-  save(): void {
-    /* this.placeService.update(this.placeCreated);*/
+  save() {
+    /*this.setEdition(false);
+    console.log('selected place apres changement' + this.selectedPlace);*/
+
   }
 
   goBack(): void {
