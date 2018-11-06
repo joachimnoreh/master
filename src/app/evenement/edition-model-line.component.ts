@@ -13,9 +13,9 @@ import {TYPES} from '../../../server/mock/data/types';
 export class EditionModelLineComponent implements OnInit {
 
   @Input() lineModel: LineModel;
-  number: number;
+  totalComponentWidth: number;
   selectedElement: ComposantModel;
-  simulation: boolean = false;
+  simulation: false;
 
   constructor(private communicationEditionEventService: CommunicationEditionEventService) {
     this.communicationEditionEventService.simulationSwitch$.subscribe((simulation: boolean) => this.simulation = simulation);
@@ -26,30 +26,29 @@ export class EditionModelLineComponent implements OnInit {
   }
 
   calculateNumber() {
-    this.number = 0;
-    for (var element in this.lineModel.elements) {
-      this.number = this.number + this.lineModel.elements[element].width;
+    this.totalComponentWidth = 0;
+    for (let componentModel in this.lineModel.componentModels) {
+      this.totalComponentWidth = this.totalComponentWidth + this.lineModel.componentModels[componentModel].width;
     }
   }
 
-  addElement(ordre: number) {
-    var element = new ComposantModel();
-    element.width = 3;
-    element.label = 'nom?';
-    element.type = TYPES[0].name;
-
-    this.lineModel.elements.push(element);
+  addElement() {
+    let componentModel = new ComposantModel();
+    componentModel.width = 3;
+    componentModel.label = 'Name';
+    componentModel.type = TYPES[0].name;
+    this.lineModel.componentModels.push(componentModel);
     this.calculateNumber();
-    console.log(this.number);
-    this.setSelectedelement(element);
+    console.log(this.totalComponentWidth);
+    this.setSelectedelement(componentModel);
 
   }
 
   removeElement(element: ComposantModel) {
-    if (this.selectedElement == element) {
+    if (this.selectedElement === element) {
       this.selectedElement = null;
     }
-    this.lineModel.elements.splice(this.lineModel.elements.indexOf(element), 1);
+    this.lineModel.componentModels.splice(this.lineModel.componentModels.indexOf(element), 1);
 
   }
 
@@ -62,8 +61,8 @@ export class EditionModelLineComponent implements OnInit {
     this.communicationEditionEventService.switchComponentModel(this.selectedElement);
   }
 
-  validateMofication() {
-    if (this.selectedElement.type == 'choixMultiple') {
+  validateModification() {
+    if (this.selectedElement.type === 'choixMultiple') {
       this.selectedElement.values = this.selectedElement.value.split(';');
     }
   }

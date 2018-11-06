@@ -1,18 +1,15 @@
 import {LineModel} from './line-model';
+import {Site} from '../../places/models/site';
+import {ComposantModel} from './composant-model';
 
 export class EventModel {
-  //site:Site;
-  static id: number = 1;
+  site: Site;
   _id: string;
   name: string;
-  //__v:number;
-  lines: LineModel[];
+  lineModels: LineModel[];
 
   constructor() {
-    this._id = '' + EventModel.id;
-    this.lines = [];
-    this.name = '';
-    EventModel.id++;
+    this.lineModels = new Array<LineModel>();
   }
 
 }

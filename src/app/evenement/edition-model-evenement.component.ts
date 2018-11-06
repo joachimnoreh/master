@@ -4,7 +4,6 @@ import {ComposantModel} from './models/composant-model';
 import {EventModel} from './models/eventModel';
 import {LineModel} from './models/line-model';
 import {EventModelService} from './services/event.model.service';
-import {EVENT_MODELS} from '../../../server/mock/data/eventModel';
 
 @Component({
   selector: 'edition-model-event',
@@ -18,50 +17,59 @@ export class EditionModelEvenementComponent {
   private eventModels: EventModel[];
 
   constructor(private eventModelService: EventModelService, private communicationEditionEventService: CommunicationEditionEventService) {
-    this.eventModelService.getAllEvenementModele().subscribe((eventModels: EventModel[]) => {
-      this.eventModel = new EventModel();
+    this.eventModel = new EventModel();
+    this.eventModelService.getEventModels().subscribe((eventModels: EventModel[]) => {
+
       this.eventModels = eventModels;
     });
     this.communicationEditionEventService.simulationSwitch$.subscribe((simulation: boolean) => this.simulation = simulation);
   }
 
 
-  addLine(ordre: number): void {
+  addLine(order: number): void {
     const lineModel = new LineModel();
     lineModel.name = '';
     lineModel.input = true;
-    lineModel.elements = new Array<ComposantModel>();
-    lineModel.ordre = ordre + 1;
-    this.upgradeIndex(lineModel.ordre);
-    this.eventModel.lines.push(lineModel);
-    this.eventModel.lines.sort(this.ordreLine);
+    lineModel.componentModels = new Array<ComposantModel>();
+    lineModel.order = order + 1;
+    this.upgradeIndex(lineModel.order);
+    this.eventModel.lineModels.push(lineModel);
+    this.eventModel.lineModels.sort(this.orderLine);
   }
 
   addTitleLine(): void {
     const lineModel = new LineModel();
     lineModel.name = 'Title';
     lineModel.input = false;
-    lineModel.ordre = this.eventModel.lines.length;
-    lineModel.elements = new Array<ComposantModel>();
-    this.eventModel.lines.push(lineModel);
+    lineModel.order = this.eventModel.lineModels.length;
+    lineModel.componentModels = new Array<ComposantModel>();
+    this.eventModel.lineModels.push(lineModel);
   }
 
-  upgradeIndex(ordre: number) {
-    for (ordre; ordre < this.eventModel.lines.length - 1; ordre++) {
-      this.eventModel.lines[ordre].ordre = this.eventModel.lines[ordre].ordre + 1;
+  upgradeIndex(order: number) {
+    for (order; order < this.eventModel.lineModels.length - 1; order++) {
+      this.eventModel.lineModels[order].order = this.eventModel.lineModels[order].order + 1;
     }
   }
 
   save() {
-    console.log();
+    if (this.eventModel._id) {
+      this.eventModelService.updateEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
+        this.eventModel = eventModel;
+        this.simulation = true;
+      });
+    } else {
+      this.eventModelService.createEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
+        this.eventModel = eventModel;
+        this.simulation = true;
+      });
+    }
+    this.simulation = true;
   }
 
-  createEvent() {
-
-    console.log(JSON.stringify(this.eventModel));
+  cancel() {
     this.eventModel = new EventModel();
   }
-
   setEvent(event: EventModel) {
     this.eventModel = event;
   }
@@ -71,14 +79,17 @@ export class EditionModelEvenementComponent {
     this.communicationEditionEventService.switchSimulation(this.simulation);
   }
 
-  ordreLine(line1: LineModel, line2: LineModel): number {
+  orderLine(line1: LineModel, line2: LineModel): number {
 
-    if (line1.ordre < line2.ordre)
+    if (line1.order < line2.order) {
       return -1;
-    if (line1.ordre > line2.ordre)
+    }
+    if (line1.order > line2.order) {
       return 1;
-    if (line1.ordre < line2.ordre)
+    }
+    if (line1.order < line2.order) {
       return 0;
+    }
   }
 }
 

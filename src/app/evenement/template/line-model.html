@@ -1,34 +1,30 @@
 <form class="lineModel row">
   <div *ngFor="let component of lineModel.elements"  [ngSwitch]="component.type" class="col-xl-{{component.width}} ">
-      <label><label *ngIf="component.mandatory">*</label>{{component.label}}</label>
+    <div >
+    <label class="label-component">{{component.label}}
 
-      <div class="input-group col-xl-12 {{(component == selectedElement )?'has-success':''}}">
+      </label>
+      <i class="far fa-edit edit-component" (click)="setSelectedelement(component);" ></i>
+               <i class="fas fa-times remove-component" (click)="removeElement(component);"></i>
+
+    </div>
+      <div class="input-group col-xl-12">
         <input *ngSwitchCase="'simpleText'" type="text" class="form-control" title="{{component.help}}"
-               [(ngModel)]="component.value" name="eventAttribute"/>
+               [(ngModel)]="component.value" name="eventAttribute" [required]="component.mandatory"/>
 
         <input type="checkbox" *ngSwitchCase="'checkbox'" class="form-control" title="{{component.help}}"
-               [(ngModel)]="component.bvalue" name="eventAttribute"/>
+               [(ngModel)]="component.value" name="eventAttribute" [required]="component.mandatory"/>
 
         <input type="text" *ngSwitchCase="'textArea'" class="form-control" title="{{component.help}}"
-               [(ngModel)]="component.value" name="eventAttribute"/>
+               [(ngModel)]="component.value" name="eventAttribute" [required]="component.mandatory"/>
 
         <select *ngSwitchCase="'choixMultiple'" class="form-control" title="{{component.help}}" id="power"
-                [(ngModel)]="component.value" name="eventAttribute">
+                [(ngModel)]="component.value" name="eventAttribute" [required]="component.mandatory">
           <option *ngFor="let value of component.values" [value]="value">{{value}}</option>
         </select>
 
         <input *ngSwitchCase="'number'" type="text" class="form-control" title="{{component.help}}"
-               [(ngModel)]="component.value" name="eventAttribute"/>
-        <span *ngIf="!simulation" class="input-group-btn ">
-        			<button class="btn btn-default"
-                      (click)="setSelectedelement(component);" type="button">
-               <i class="far fa-edit "></i>
-              </button>
-        			 <button type="button" class="btn btn-default"
-                       (click)="removeElement(component);">
-                 <i class="fas fa-times"></i>
-               </button>
-      			</span>
+               [(ngModel)]="component.value" name="eventAttribute" [required]="component.mandatory"/>
       </div>
       <label *ngIf="component.mandatory" class="alert-danger">{{component.message}}</label>
     </div>

@@ -9,23 +9,19 @@ import {SiteService} from './site.service';
 @Injectable()
 export class PlaceService {
 
-  private findPlaceUrl = 'findPlace/';
-  private updatePlaceUrl = 'updatePlace/';
-  private createPlaceUrl = 'createPlace/';
-  private httpOptions = {
+  private placeUrl = 'places/';
+  private httpHeaders = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   constructor(private http: HttpClient, private siteService: SiteService) {
   }
 
   update(place: Place): Observable<Place> {
-    const url = this.updatePlaceUrl;
-    return this.http.post<Place>(url, JSON.stringify(place),  this.httpOptions );
+    return this.http.put<Place>(this.placeUrl, JSON.stringify(place),  this.httpHeaders );
   }
 
   createPlace(place: Place): Observable<Place> {
-    const url = this.createPlaceUrl;
-    return this.http.post<Place>(url, JSON.stringify(place), this.httpOptions);
+    return this.http.post<Place>(this.placeUrl, JSON.stringify(place), this.httpHeaders);
   }
 
   private handleError(error: any): Promise<any> {

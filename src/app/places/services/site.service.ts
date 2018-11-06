@@ -7,15 +7,16 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class SiteService {
 
-  private urlFindSite = 'findSite/';
-  private urlGetPlace = 'findAllSite/';
-  private _headers = new HttpHeaders({'Content-Type': 'application/json'});
+  private urlSite = 'sites/';
+  private httpHeaders = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) {
   }
 
   getSite(): Observable<Site> {
-    return this.http.get<Site>(/*this.siteUrl + */this.urlFindSite);
+    return this.http.get<Site>(this.urlSite, this.httpHeaders);
   }
 
   private handleError(error: any): Promise<any> {

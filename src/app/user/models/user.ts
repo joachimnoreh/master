@@ -1,4 +1,5 @@
-
+import {Site} from '../../places/models/site';
+import {Role} from '../../role/models/role';
 
 
 export class User {
@@ -6,12 +7,13 @@ export class User {
   lastname: string;
   firstname: string;
   matricule: number;
-  email:string;
-  role: string;
-  //present: boolean;
-  //site:Site;
+  email: string;
+  role: Role[];
+  // present: boolean;
+  site: Site;
 
   constructor() {
+
   }
 
 }

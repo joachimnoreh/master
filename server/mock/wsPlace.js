@@ -3,8 +3,9 @@
 var mongoose = require('mongoose');
 
 module.exports = function (app) {
-  app.placeModelSchema =  mongoose.Schema({
+  app.placeModelSchema = mongoose.Schema({
     name: 'string',
+    active: 'boolean',
     placeChildren: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'place',
@@ -12,112 +13,71 @@ module.exports = function (app) {
     }]
 
   });
+
   app.placeModelSchema.plugin(require('mongoose-autopopulate'));
-  app.placeModel =  mongoose.model('place', app.placeModelSchema);
+  app.placeModel = mongoose.model('place', app.placeModelSchema);
 
-  app.get('/mci/findPlace/:place_id', function (req, res) {
-
-// use mongoose to get all places in the database
-    app.placeModel.find({_id: req.params.place_id}, function (err, places) {
-
-      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-      if (err)
-        res.send(err)
-
-      res.json(places); // return all todos in JSON format
-    });
-  });
-
-  app.post('/updatePlace', function (req, res) {
-
-// create a todo, information comes from AJAX request from Angular
-    //TODO : try return place directly with findbyidandupdate
-    app.placeModel.findOneAndUpdate({_id : req.body._id },  {name: req.body.name}, {new:true},function (err, place) {
-      if (err)
-        res.send(err);
-      console.log(place);
-      res.json(place);
-     /* app.placeModel.find({_id: place._id}, function (err, place) {
-        if (err)
-          res.send(err);
-
-
-
-
-      });*/
-
-    });
-  });
-  app.post('/createPlace', function (req, res) {
-
-// create a todo, information comes from AJAX request from Angular
-    app.placeModel.create({
-      name: req.body.name,
-    }, function (err, place) {
-      if (err) {
-        res.send(err);
+  app.checkParams = function (res,...paramsToCheck)
+  {
+    for (let paramToCheck of paramsToCheck) {
+      if (!paramToCheck) {
+        res.status(400);
+        res.send();
       }
+    }
+  };
+  app.checkServerError=function (res,err)
+  {
+    if (err) {
+      res.status(500);
+      res.send(err);
+    }
+  };
 
-      // get and return place created
-      app.placeModel.findById(req.body.parent, function (err, parent) {
-        if (err) {
-          res.send(err)
-        }
+app.get('/places/:place_id', function (req, res) {
 
-        parent.placeChildren.push(place);
-        parent.save(function (err) {
-          if (err)
-            res.send(err);
+  app.checkParams(res,req.params.place_id);
 
-        });
+  app.placeModel.find({_id: req.params.place_id}, function (err, place) {
+    app.checkServerError(res,err);
+    res.json(place); // return all todos in JSON format
+  });
+});
 
+app.put('/places', function (req, res) {
+
+  app.placeModel.findOneAndUpdate({_id: req.body._id}, {name: req.body.name}, {new: true}, function (err, place) {
+    app.checkServerError(res,err);
+    res.json(place);
+  });
+});
+
+app.post('/places', function (req, res) {
+
+  app.checkParams(res,req.body.name);
+  app.placeModel.create({
+    name: req.body.name,
+  }, function (err, place) {
+    app.checkServerError(res,err);
+
+    app.placeModel.findById(req.body.parent, function (err, parent) {
+      app.checkServerError(res,err);
+
+      parent.placeChildren.push(place);
+      parent.save(function (err) {
+        app.checkServerError(res,err);
       });
-      res.json(place);
     });
+    res.json(place);
   });
+});
 
-  app.delete('/mci/removePlace', function (req, res) {
+app.delete('/places', function (req, res) {
 
-// create a todo, information comes from AJAX request from Angular
-    placeModel.remove({_id: req.params.place_id}, function (err, places) {
-
-      // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-      if (err)
-        res.send(err);
-
-      res.json(places); // return all todos in JSON format
-    });
+  app.checkParams(res,req.body._id);
+  app.placeModel.findOneAndUpdate({_id: req.body._id}, {active: false}, {new: true}, function (err, place) {
+    app.checkServerError(res,err);
+    res.json(place);
   });
-
-  /* REST NIVEAU 1 */
-
-  /*
-  app.get('/mci/place/', function(req, res) {
-
-  if (req.body[0][0] == 'findAllPlace'){
-
-  }
-
-  });
-
-  app.post('/mci/place/', function(req, res) {
-
-  if (req.body[0][0] == 'update'){
-
-  }
-  if (req.body[0][0] == 'delete'){
-
-  }
-
-  });
-
-  app.delete('/mci/place/', function(req, res) {
-
-  if (req.body[0][0] == 'delete'){
-
-  }
-
-  });
-
-  */
-}
+})
+};

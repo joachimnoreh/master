@@ -24,7 +24,8 @@ export class UserFormComponent implements OnInit {
     if (this.user._id) {
       this.userService.update(this.user)
         .subscribe((user: User) => {
-          console.log(user);
+         this.user = user;
+         this.edit = false;
         });
     } else {
       this.userService.createUser(this.user)
@@ -37,19 +38,18 @@ export class UserFormComponent implements OnInit {
   reset() {
     if (this.user._id) {
       this.edit = false;
-      this.user = this.userSave;
+      this.userService.getUser(this.user._id).subscribe((user: User) => {
+            this.user = user;
+      });
     } else {
       this.user = new User();
     }
   }
 
   ngOnInit() {
-
     if (this.user === undefined) {
       this.user = new User();
       this.edit = true;
-    }else{
-      this.userSave = this.user;
     }
   }
 }

@@ -37,9 +37,6 @@
 </div>
 <div class="col-xl-3">
 	<!--<label for="lastname">position</label>-->
-	<input type="text" class="form-control" id="role"
-         required  placeholder="role"
-         [(ngModel)]="user.role" name="role" [disabled]="!edit">
 </div>
     <button *ngIf="!edit" type="button" class="btn btn-default" (click)="edit = true">
       <i class="far fa-edit fa-lg"></i>

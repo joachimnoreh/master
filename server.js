@@ -44,6 +44,7 @@ const site = require('./server/mock/wsSite')(app);
 const users = require('./server/mock/wsUser')(app);
 const roles = require('./server/mock/wsRole')(app);
 const types = require('./server/mock/wstype')(app);
+const eventModel = require('./server/mock/wsEventModel')(app);
 
 if(!module.parent) {
   start(app, config);

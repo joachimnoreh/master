@@ -1,11 +1,10 @@
-<div class="panel panel-primary" id="panel-user">
+<div class="panel panel-primary" id="panel-line">
   <div class="panel-heading">
     <h3 class="panel-title">{{eventModel.name}}</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body line">
     <div *ngFor="component of currentLine.composant">
-
-      <div class="col-md-{{component.with}}">
+      <div class="col-xl-{{component.with}}">
         <div *ngIf="component.type.name == 'choixMultiple'">
           <select class="form-control" id="power" required [(ngModel)]="componant.value" name="power">
             <option *ngFor="let value of component.values" [value]="value">{{state}}</option>

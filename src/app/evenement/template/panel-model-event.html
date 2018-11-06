@@ -1,60 +1,63 @@
-<div *ngIf="eventModel" class="col-md-9">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3>
-        <input *ngIf="!(simulation)" type="text" class="form-control" title="Nom de l'evenement"
-               placeholder="{{eventModel.name}}" [(ngModel)]="eventModel.name" name="eventTitle"/>{{eventModel.name}}
-      </h3>
-      <input class="col-md-1" type="checkbox" class="form-control" title="Simulation" [(ngModel)]="simulation"
-             name="Simulation" (click)="switchSimulation()"/>
-    </div>
-    <div class="panel-body">
-      <div *ngFor=" let lineModel of eventModel.lines">
 
-        <div class="col-md-12">
-
-          <h4 *ngIf="!lineModel.input"><input type="text" class="form-control" [(ngModel)]="lineModel.name"
-                                              name="{{lineModel.name}}"/></h4>
-
-
-          <event-model-line-form *ngIf="lineModel.input" [lineModel]="lineModel"></event-model-line-form>
-          <button *ngIf="!(simulation)" type="button" class="col-md-12  btn btn-default"
-                  (click)="addLine(lineModel.ordre);">
-            Ajouter ligne de saisie
-          </button>
-        </div>
-
+<div class="col-xl-12 ">
+  <div class="row">
+    <div class="panel panel-primary col-xl-1">
+      <div class="row">
+        <h3 class="panel-title col-xl-9">Events</h3>
+        <i class="fas fa-toggle-on col-xl-1" *ngIf="simulation" (click)="switchSimulation()"></i>
+        <i class="fas fa-toggle-off col-xl-1" *ngIf="!simulation" (click)="switchSimulation()"></i>
       </div>
-      <button *ngIf="!(simulation)" class="col-md-12  btn btn-default" (click)="addTitleLine();">Ajouter titre</button>
-    </div>
-  </div>
-  <div>
-    <button type="button" class="glyphicon glyphicon-ok btn btn-default" (click)="createEvent()"></button>
-
-  </div>
-</div>
-<div class="col-md-3" id="planel-lieu-droite">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Evenements</h3>
-    </div>
-    <div class="panel-body">
       <div *ngFor="let event of eventModels">
         <div (click)="setEvent(event)">{{event.name}}</div>
+
       </div>
     </div>
-  </div>
+    <div *ngIf="eventModel" class="col-xl-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3>
+            <input *ngIf="!(simulation)" type="text" class="form-control" title="Nom de l'evenement"
+                   placeholder="{{eventModel.name}}" [(ngModel)]="eventModel.name" name="eventTitle"/>
+            <label *ngIf="(simulation)">{{eventModel.name}}</label>
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Modifier composant </h3>
+          </h3>
+
+        </div>
+        <div class="panel-body">
+          <div *ngFor=" let lineModel of eventModel.lines">
+
+            <div class="col-xl-12">
+
+              <h4 *ngIf="!lineModel.input"><input type="text" class="form-control" [(ngModel)]="lineModel.name"
+                                                  name="{{lineModel.name}}"/></h4>
+
+
+              <event-model-line-form *ngIf="lineModel.input" [lineModel]="lineModel"></event-model-line-form>
+              <button *ngIf="!(simulation)" type="button" class="col-xl-12  btn btn-default"
+                      (click)="addLine(lineModel.ordre);">
+                Ajouter ligne de saisie
+              </button>
+            </div>
+
+          </div>
+          <button *ngIf="!(simulation)" class="col-xl-12  btn btn-default" (click)="addTitleLine();">Ajouter titre
+          </button>
+        </div>
+      </div>
+      <div id="actionEvent">
+        <button type="button" class="  btn btn-default" (click)="createEvent()">
+          Save
+        </button>
+        <button type="button" class="  btn btn-default" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
     </div>
-    <div class="panel-body">
-
+    <div class="col-xl-3">
+      <h3 class="panel-title">Edit</h3>
       <edit-component-model></edit-component-model>
 
     </div>
   </div>
 </div>
-
     
