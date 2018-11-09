@@ -19,6 +19,7 @@ import {NotFoundComponent} from './error/not-found.component';
 import {EventModelService} from './evenement/services/event.model.service';
 import {CommunicationService} from './places/services/communication.service';
 import {GlobalService} from './common/services/global.service';
+import {EventComponentModelService} from './evenement/services/event.component.model.service';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {GlobalService} from './common/services/global.service';
     UserFormComponent,
     EditComponentModelComponent,
     EditionModelEvenementComponent,
-    EditionModelLineComponent
+    EditionModelLineComponent,
+
   ],
   providers: [
     PlaceService,
@@ -47,6 +49,7 @@ import {GlobalService} from './common/services/global.service';
     CommunicationUserService,
     CommunicationEditionEventService,
     EventModelService,
+    EventComponentModelService,
     GlobalService
   ],
   exports: [

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="ae8a09deb2adf1fc6d42624136ecb8a222f73c13" datatype="html">
+        <source>Lieux</source>
+        <target>Lieux</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d13a9cd5ed3dcee0eab22cb25198d43886942be" datatype="html">
+        <source>Users</source>
+        <target>Users</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5081b1cea349bcb08231ace87ab11c5ac16f3d74" datatype="html">
+        <source>Consignes</source>
+        <target>Consignes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="35b9c6347afbd72fe737c1849181c1e37757a6dc" datatype="html">
+        <source>Evenements</source>
+        <target>Evenements</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3fdf21556da222263a2c4bc9de11cbf7daf2b9f4" datatype="html">
+        <source>Rondier</source>
+        <target>Rondier</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2987c973680b873eadc001f146c6dd0b0c8d88ac" datatype="html">
+        <source>Materiels</source>
+        <target>Materiels</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9d51b3c90afda70700229d1b8a55371c13cb3bce" datatype="html">
+        <source>Documents</source>
+        <target>Documents</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/header.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="995921ec728f66ae2c08dbe41e3d2f14c879a0b8" datatype="html">
+        <source>
+     Fait avec Angular
+  </source>
+   <target>
+     Fait avec Angular
+  </target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/common/layout/template/footer.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f61c6867295f3b53d23557021f2f4e0aa1d0b8fc" datatype="html">
+        <source>Type</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="622c8cdb03ed166e3e1b652021cf0992cb26bc18" datatype="html">
+        <source>Titre</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0407fda231fe85bd6ae6f9802a06b2077a238011" datatype="html">
+        <source>Taille</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="20da2718b078b92db625c8a6659ae183cb0b1869" datatype="html">
+        <source>Mandatory</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7784cf28e82e66c01ea210d84fb8ca9059e95726" datatype="html">
+        <source>Valeur par defaut</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4be4a7d3d4dc635a15ba62277065ee6f4672b5cd" datatype="html">
+        <source>Aide</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="809b0c848932a41318f77a2aace904ef429c13f4" datatype="html">
+        <source>Values</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4007ecfcc9e8871305e7c02b1209ebc96ea1406e" datatype="html">
+        <source>Error message</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        <source>
+      Save
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="da44efc7b658c318651866454d258bbbe57ff21c" datatype="html">
+        <source>
+      Cancel
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/edit-component-model.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="af88c1e95a1d16d3cdbb7210981e0bfb6dc1d137" datatype="html">
+        <source>Events</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/panel-model-event.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f409607f0e82dd877f204eff4692e5d1044c9872" datatype="html">
+        <source>
+                Add input line
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/panel-model-event.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bcc7c11afe64571aab9ed39567c8b7656b60e264" datatype="html">
+        <source>
+            Add title line
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/panel-model-event.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="368b817b7cc89a1705d9ac752da4ddda15d42ae8" datatype="html">
+        <source>
+          Save
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/panel-model-event.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb8aad312b72bbb7e5a1e2cc0b55fae8962bf0fb" datatype="html">
+        <source>
+          Cancel
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/evenement/template/panel-model-event.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

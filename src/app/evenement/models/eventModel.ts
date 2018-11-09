@@ -1,6 +1,6 @@
-import {LineModel} from './line-model';
+import {LineModel} from './lineModel';
 import {Site} from '../../places/models/site';
-import {ComposantModel} from './composant-model';
+
 
 export class EventModel {
   site: Site;

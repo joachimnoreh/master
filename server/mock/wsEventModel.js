@@ -1,17 +1,12 @@
 /* REST NIVEAU 0 */
 
 var mongoose = require('mongoose');
-
 module.exports = function (app) {
  app.componentModelSchema = mongoose.Schema({
     name: 'string',
     width:'number',
     label:'string',
-    type:[{
-           type: mongoose.Schema.Types.ObjectId,
-               ref: 'type',
-               autopopulate: true
-             }],
+    type:[app.typeModelSchema],
      mandatory:'boolean',
      default_text:'string',
      help:'string',
@@ -26,33 +21,22 @@ module.exports = function (app) {
        name: 'string',
        input:'boolean',
        order:'string',
-       componentModels:[{
-              type: mongoose.Schema.Types.ObjectId,
-                  ref: 'componentModel',
-                  autopopulate: true
-                }],
+       componentModels:[app.componentModelSchema],
      });
    app.lineModelSchema.plugin(require('mongoose-autopopulate'));
-   app.lineModel = mongoose.model('lineModel', app.lineModelSchema);
+   app.lineModel = mongoose.model('lineModel', app.lineModelSchema,'lineModels');
 
 
     app.eventModelSchema = mongoose.Schema({
           name: 'string',
-          input:'boolean',
-          order:'string',
-          lineModels:[{
-                 type: mongoose.Schema.Types.ObjectId,
-                     ref: 'lineModel',
-                     autopopulate: true
-                   }],
+          lineModels:[app.lineModelSchema]
         });
-      app.eventModelSchema.plugin(require('mongoose-autopopulate'));
       app.eventModel = mongoose.model('eventModel', app.eventModelSchema);
 
 app.get('/eventModel', function(req,res){
-
- app.eventModel.find(function (err, eventModels) {
+ app.eventModel.find().exec(function (err, eventModels) {
     app.checkServerError(res,err);
+    console.log(eventModels);
     res.json(eventModels);
   });
 });
@@ -64,20 +48,52 @@ app.get('/eventModel/:eventModelId', function(req,res){
   });
 });
 
+var mapLineModel = function (requestLine){
+   var line = new app.lineModel();
+   line.name = requestLine.name;
+   line.input = requestLine.input;
+   line.order = requestLine.order;
+   return line;
+}
+var mapComponentModel = function (requestLine){
+   var line = new app.lineModel();
+   line.name = requestLine.name;
+   line.input = requestLine.input;
+   line.order = requestLine.order;
+   return line;
+}
+var mapEventComponentModel = function (requestEvent){
+
+}
+
 app.post('/eventModel', function(req,res){
+var eventM = new app.eventModel;
+ eventM.name= req.body.name;
+ for ( var i in req.body.lineModels){
+          var lineM = mapLineModel(req.body.lineModels[i]);
+          eventM.lineModels.push(lineM);
+ }
 
- app.eventModel.create(req.body,function (err, eventModel) {
+  app.eventModel.create(eventM,function (err, eventModel) {
+  console.log('err='+err);
+  console.log('eventModel='+eventModel);
     app.checkServerError(res,err);
     res.json(eventModel);
   });
-});
 
+
+  });
 app.put('/eventModel', function(req,res){
+var eventM = new app.eventModel;
+ eventM.name= req.body.name;
+ for ( var i in req.body.lineModels){
+          var lineM = mapLineModel(req.body.lineModels[i]);
+          eventM.lineModels.push(lineM);
+ }
 
- app.eventModel.findOneAndUpdate({_id: req.body._id}, req.body,{new:true},function (err, eventModel) {
+  app.eventModel.findOneAndUpdate({_id: req.body._id},req.body,{upsert:true,new:true},function (err, eventModel) {
     app.checkServerError(res,err);
     res.json(eventModel);
   });
 });
-
 }

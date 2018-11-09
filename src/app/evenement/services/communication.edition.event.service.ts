@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
 
-import {ComposantModel} from '../models/composant-model';
+import {EventComponentModel} from '../models/eventComponentModel';
 
 @Injectable()
 export class CommunicationEditionEventService {
@@ -21,7 +21,7 @@ export class CommunicationEditionEventService {
     this.simulationSwitch$.emit(simulation);
   }
 
-  public switchComponentModel(composantModel: ComposantModel): void {
+  public switchComponentModel(composantModel: EventComponentModel): void {
     this.componentModelSwitch$.emit(composantModel);
   }
 }

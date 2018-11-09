@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
-import {ComposantModel} from './models/composant-model';
+
 import {CommunicationEditionEventService} from './services/communication.edition.event.service';
-import {TYPES} from '../../../server/mock/data/types';
+import {EventComponentModel} from './models/eventComponentModel';
+import {GlobalService} from '../common/services/global.service';
+import {EventComponentType} from './models/eventComponentType';
+
 
 @Component({
   selector: 'edit-component-model',
@@ -10,15 +13,25 @@ import {TYPES} from '../../../server/mock/data/types';
 })
 export class EditComponentModelComponent {
 
-  private composantModel: ComposantModel;
+  composantModel: EventComponentModel;
+  stringTypeComponent: string;
 
-  constructor(private communicationEditionEventService: CommunicationEditionEventService) {
-    this.communicationEditionEventService.componentModelSwitch$.subscribe((composantModel: ComposantModel) => this.composantModel = composantModel);
+  constructor(private communicationEditionEventService: CommunicationEditionEventService, private globalService: GlobalService) {
+    this.communicationEditionEventService.componentModelSwitch$.subscribe((composantModel: EventComponentModel) => this.composantModel = composantModel);
 
   }
 
-  getTypes() {
-    return TYPES;
+  getTypes(): EventComponentType[] {
+    return this.globalService.getType();
+  }
+
+  setType(newVal: string) {
+    const types = this.getTypes();
+    for (let i in types) {
+      if (newVal === types[i].name) {
+        this.composantModel.type = types[i];
+      }
+    }
   }
 
 }

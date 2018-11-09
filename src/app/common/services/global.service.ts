@@ -3,28 +3,30 @@ import {Site} from '../../places/models/site';
 import {SiteService} from '../../places/services/site.service';
 import {UserService} from '../../user/services/user.service';
 import {Observable} from 'rxjs';
-import {Type} from '../../evenement/models/type';
 import {HttpClient} from '@angular/common/http';
+import {EventComponentType} from '../../evenement/models/eventComponentType';
 
 @Injectable()
 export class GlobalService {
 
   site: Site;
-  private types: Type[];
+  private types: EventComponentType[];
   private urlType = 'types/';
 
 
   constructor(private  siteService: SiteService, private  userService: UserService, private http: HttpClient) {
-    this.getType().subscribe((types: Type[]) => {
+    this.retrieveType().subscribe((types: EventComponentType[]) => {
       this.types = types;
       console.log(this.types);
     });
   }
 
-  getType(): Observable<Type[]> {
-    return this.http.get<Type[]>(this.urlType);
+  retrieveType(): Observable<EventComponentType[]> {
+    return this.http.get<EventComponentType[]>(this.urlType);
   }
-
+  getType(): EventComponentType[] {
+    return this.types;
+  }
   /*getUser() {
      this.userService.getAllUsers(this.site).subscribe((users: User[]) => {
        console.log(users);

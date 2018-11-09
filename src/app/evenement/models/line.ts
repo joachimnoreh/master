@@ -1,12 +1,13 @@
-import {Composant} from './composant';
+import {EventComponent} from './eventComponent';
+import {LineModel} from './lineModel';
 
 export class Line {
   _id: string;
   name: string;
-  input: boolean;
-  elements: Composant[];
+  input:boolean;
+  elements: EventComponent[];
+  lineModel: LineModel;
 
-  //__v:number;
 
   constructor() {
   }

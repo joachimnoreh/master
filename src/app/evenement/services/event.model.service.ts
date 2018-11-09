@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class EventModelService {
 
-  private urlEventModel = 'eventModels/';
+  private urlEventModel = 'eventModel/';
   private httpHeaders = {
     headers : new HttpHeaders({'Content-Type': 'application/json'})
   };

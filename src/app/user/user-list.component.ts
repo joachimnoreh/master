@@ -15,7 +15,7 @@ import {SiteService} from '../places/services/site.service';
 export class UserListComponent implements OnInit {
 
   title: 'Liste des users';
-  private users: User[];
+  users: User[];
   private site: Site;
 
   constructor(private userService: UserService, private siteService: SiteService, private globalService: GlobalService) {

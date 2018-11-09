@@ -66,6 +66,12 @@
           "configurations": {
             "production": {
               "browserTarget": "FreeMCI:build:production"
+            },
+            "fr": {
+              "browserTarget": "FreeMCI:build:fr"
+            },
+            "en": {
+              "browserTarget": "FreeMCI:build:en"
             }
           }
         },
@@ -73,6 +79,15 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "FreeMCI:build"
+          },
+          "configurations" : {
+            "fr": {
+              "aot": true,
+              "outputPath": "locale/",
+              "outFile": "messages.fr.untranslated.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr"
+            }
           }
         },
         "test": {

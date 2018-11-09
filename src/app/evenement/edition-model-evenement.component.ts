@@ -1,36 +1,36 @@
 import {Component} from '@angular/core';
 import {CommunicationEditionEventService} from './services/communication.edition.event.service';
-import {ComposantModel} from './models/composant-model';
 import {EventModel} from './models/eventModel';
-import {LineModel} from './models/line-model';
+import {LineModel} from './models/lineModel';
+import {EventComponentModel} from './models/eventComponentModel';
 import {EventModelService} from './services/event.model.service';
 
 @Component({
   selector: 'edition-model-event',
-  templateUrl: './template/panel-model-event.html'
+  templateUrl: './template/edition-model-event.html'
 
 })
 export class EditionModelEvenementComponent {
 
-  private eventModel: EventModel;
-  private simulation: boolean = false;
-  private eventModels: EventModel[];
+  eventModel: EventModel;
+  simulation: boolean = false;
+  eventModelList: EventModel[];
 
   constructor(private eventModelService: EventModelService, private communicationEditionEventService: CommunicationEditionEventService) {
     this.eventModel = new EventModel();
     this.eventModelService.getEventModels().subscribe((eventModels: EventModel[]) => {
 
-      this.eventModels = eventModels;
+      this.eventModelList = eventModels;
     });
     this.communicationEditionEventService.simulationSwitch$.subscribe((simulation: boolean) => this.simulation = simulation);
   }
 
 
   addLine(order: number): void {
-    const lineModel = new LineModel();
-    lineModel.name = '';
+    let lineModel = new LineModel();
+    lineModel.name = 'jj';
     lineModel.input = true;
-    lineModel.componentModels = new Array<ComposantModel>();
+    lineModel.componentModels = new Array<EventComponentModel>();
     lineModel.order = order + 1;
     this.upgradeIndex(lineModel.order);
     this.eventModel.lineModels.push(lineModel);
@@ -38,12 +38,16 @@ export class EditionModelEvenementComponent {
   }
 
   addTitleLine(): void {
-    const lineModel = new LineModel();
+    let lineModel = new LineModel();
     lineModel.name = 'Title';
     lineModel.input = false;
     lineModel.order = this.eventModel.lineModels.length;
-    lineModel.componentModels = new Array<ComposantModel>();
+    lineModel.componentModels = new Array<EventComponentModel>();
+    console.log(lineModel);
+    console.log( this.eventModel.lineModels.length);
     this.eventModel.lineModels.push(lineModel);
+    console.log(this.eventModel.lineModels.length);
+    console.log('new title ligne');
   }
 
   upgradeIndex(order: number) {
@@ -53,18 +57,18 @@ export class EditionModelEvenementComponent {
   }
 
   save() {
-    if (this.eventModel._id) {
+ /*   if (this.eventModel._id) {
       this.eventModelService.updateEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
         this.eventModel = eventModel;
         this.simulation = true;
       });
-    } else {
+    } else {*/
       this.eventModelService.createEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
         this.eventModel = eventModel;
         this.simulation = true;
       });
-    }
-    this.simulation = true;
+   // }
+  //  this.simulation = true;
   }
 
   cancel() {

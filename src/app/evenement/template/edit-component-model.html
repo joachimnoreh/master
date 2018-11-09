@@ -1,40 +1,51 @@
-<form class="col-xl-12">
-  <div class="col-xl-12">
-    <label>Type</label>
-
-    <select [disabled]="!composantModel" class="form-control" name="type"  [(ngModel)]="composantModel.type">
+<form #editComponentModel="ngForm"  (submit)="save()" class="col-xl-12">
+  <div *ngIf="composantModel">
+  <div class="col-xl-12 " >
+    <label id="edit-cm-type-label" i18n>Type</label>
+    <!---->
+    <select [disabled]="!composantModel" class="form-control" name="type" [(ngModel)]="stringTypeComponent" (ngModelChange)="setType(stringTypeComponent)" required>
       <option *ngFor="let type of getTypes()" [value]="type.name">{{type.name}}</option>
     </select>
   </div>
   <div class="col-xl-12">
-    <label>Titre</label>
-    <input [disabled]="!composantModel" type="text" class="form-control" name="label" [(ngModel)]="composantModel.label"/>
+    <label id="edit-cm-title-label" i18n>Titre</label>
+    <input [disabled]="!composantModel" type="text" class="form-control" name="label" [(ngModel)]="composantModel.label" required />
   </div>
   <div class="col-xl-12">
-    <label>Taille</label>
-    <label>
-      <input type="text" class="form-control" name="taille" [(ngModel)]="composantModel.width"/>
-    </label>
+    <label id="edit-cm-width-label" i18n>Width</label>
+      <input type="text" class="form-control" name="width" [(ngModel)]="composantModel.width" required/>
   </div>
   <div class="col-xl-12">
-    <label>Obligatoire</label>
-    <input type="checkBox" name="obligatoire" class="form-control" [(ngModel)]="composantModel.mandatory"/>
+    <label id="edit-cm-mandatory-label" i18n>Mandatory</label>
+    <!--<input type="checkBox" name="mandatory" class="form-control" [(ngModel)]="composantModel.mandatory"/>
+    -->
+    <i class="fas fa-toggle-on col-xl-1"  *ngIf="composantModel.mandatory" (click)="composantModel.mandatory= !composantModel.mandatory"></i>
+    <i class="fas fa-toggle-off col-xl-1"  *ngIf="!composantModel.mandatory" (click)="composantModel.mandatory = !composantModel.mandatory"></i>
   </div>
 
-  <div class="col-xl-12" *ngIf="composantModel.type == 'simpleText'">
-    <label>Valeur par defaut</label>
-    <input type="text" name="default" class="form-control" [(ngModel)]="composantModel.defaut_text"/>
+  <div class="col-xl-12" *ngIf="composantModel.type.name == 'simpleText'">
+    <label id="edit-cm-default_value-label" i18n>Valeur par defaut</label>
+    <input type="text" name="default" class="form-control" [(ngModel)]="composantModel.defaut_text" required/>
   </div>
   <div class="col-xl-12">
-    <label>Aide</label>
-    <input type="text" name="aide" class="form-control" [(ngModel)]="composantModel.help"/>
+    <label id="edit-cm-help-label" i18n>Aide</label>
+    <input type="text" name="help" class="form-control" [(ngModel)]="composantModel.help" required/>
   </div>
-  <div class="col-xl-12" *ngIf="composantModel.type == 'choixMultiple'">
-    <label>Valeurs</label>
-    <input type="text" name="valeur" class="form-control" [(ngModel)]="composantModel.values"/>
+  <div class="col-xl-12" *ngIf="composantModel.type.name == 'choixMultiple'">
+    <label id="edit-cm-value-label" i18n>Values</label>
+    <input type="text" name="value" placeholder="value1;value2;..." class="form-control" [(ngModel)]="composantModel.values" required/>
   </div>
   <div class="col-xl-12" *ngIf="composantModel.mandatory">
-    <label>Message d'erreur</label>
-    <input type="text" name="erreur" class="form-control" [(ngModel)]="composantModel.message"/>
+    <label id="edit-cm-error-label" i18n>Error message</label>
+    <input type="text" name="erreur" class="form-control" [(ngModel)]="composantModel.message" required/>
+  </div>
+  <!--<div id="actionEvent"  id="edit-event-model-actions">
+    <button id="create-event-btn" type="submit" class="btn btn-default" i18n>
+      Save
+    </button>
+    <button id="cancel-event-btn" type="button" class="btn btn-default" (click)="cancel()" i18n>
+      Cancel
+    </button>
+  </div>-->
   </div>
 </form>

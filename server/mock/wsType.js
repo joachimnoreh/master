@@ -16,7 +16,7 @@ module.exports = function (app) {
 
 
   // TODO : Export in mongoDB script
-  app.post('/createType', function (req, res) {
+  app.get('/createType', function (req, res) {
 
     app.typeModel.create({name: 'select'});
     app.typeModel.create({name: 'simpleText'});

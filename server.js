@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test1');     // connect to mongoDB database on modulus.io
+mongoose.connect('mongodb://localhost/test3');     // connect to mongoDB database on modulus.io
 // pull information from HTML POST (express4)
 const fs = require('fs');
 const config ={
@@ -43,7 +43,7 @@ const lieu = require('./server/mock/wsPlace')(app);
 const site = require('./server/mock/wsSite')(app);
 const users = require('./server/mock/wsUser')(app);
 const roles = require('./server/mock/wsRole')(app);
-const types = require('./server/mock/wstype')(app);
+const types = require('./server/mock/wsType')(app);
 const eventModel = require('./server/mock/wsEventModel')(app);
 
 if(!module.parent) {
