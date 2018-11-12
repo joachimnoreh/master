@@ -30,8 +30,10 @@ import {ConsigneService} from './consigne/services/consigne.service';
 import {ConsignesComponent} from './consigne/consignes.component';
 import {ConsigneListComponent} from './consigne/consigne-list.component';
 import {EditConsigneComponent} from './consigne/edit-consigne.component';
+import {LoginComponent} from './common/login.component';
 
 
+//TODO separated module for each screen
 @NgModule({
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import {EditConsigneComponent} from './consigne/edit-consigne.component';
     ConsignesComponent,
     ConsigneListComponent,
     EditConsigneComponent,
-    ErreurMessageComponent
+    ErreurMessageComponent,
+    LoginComponent
 
   ],
   providers: [
@@ -78,7 +81,8 @@ import {EditConsigneComponent} from './consigne/edit-consigne.component';
     EventModelsComponent,
     ConsignesComponent,
     NotFoundComponent,
-    ErreurMessageComponent
+    ErreurMessageComponent,
+    LoginComponent
   ],
 
 

@@ -40,7 +40,7 @@ export class EditLineModelComponent implements OnInit {
     const componentModel = new EventComponentModel();
     componentModel.width = (this.totalComponentWidth + this.DEFAULT_SLOT_NUMBER_LINE > this.MAX_SLOT_FOR_LINE) ? this.MAX_SLOT_FOR_LINE - this.totalComponentWidth : this.DEFAULT_SLOT_NUMBER_LINE;
     componentModel.label = 'Name';
-    componentModel.type = this.typeService.getType()[0];
+    componentModel.type.push(this.typeService.getType()[0]);
     componentModel.values = [];
     this.lineModel.componentModels.push(componentModel);
     this.calculateTotalComponentWidth();

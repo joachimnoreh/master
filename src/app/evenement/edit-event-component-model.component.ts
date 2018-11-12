@@ -30,12 +30,13 @@ export class EditEventComponentModelComponent {
     const types = this.getTypes();
     for (const i in types) {
       if (newVal === types[i].name) {
-        this.composantModel.type = types[i];
+        this.composantModel.type = new Array<EventComponentType>();
+        this.composantModel.type.push(types[i]);
       }
     }
   }
   validateModification() {
-    if (this.composantModel.type.name === 'select') {
+    if (this.composantModel.type[0].name === 'select') {
       this.composantModel.values = this.composantModel.value.split(';');
     }
   }
