@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     app.roleModel = mongoose.model('role', app.roleModelSchema);
 
-    app.get('/roles/:role_id', function (req, res) {
+    app.get('/seconf/roles/:role_id', function (req, res) {
       app.checkParams(res,req.params.role_id);
       app.roleModel.find({_id: req.params.role_id}, function (err, roles) {
 

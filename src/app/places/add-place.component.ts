@@ -5,8 +5,8 @@ import {FormBuilder, Validators} from '@angular/forms';
 
 
 @Component({
-  selector: 'add-place',
-  templateUrl: './template/add_places.html'
+  selector: 'app-add-places',
+  templateUrl: './template/form-add-places.html'
 })
 export class AddPlaceComponent implements OnInit, OnChanges {
 

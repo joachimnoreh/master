@@ -7,7 +7,7 @@ module.exports = function (app) {
   });
   app.typeModel = mongoose.model('type', app.typeModelSchema);
 
-  app.get('/types', function (req, res) {
+  app.get('/seconf/types', function (req, res) {
     app.typeModel.find(function (err, types) {
       app.checkServerError(res,err);
       res.json(types);

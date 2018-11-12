@@ -6,29 +6,26 @@ import {EventComponentModel} from './models/eventComponentModel';
 import {EventModelService} from './services/event.model.service';
 
 @Component({
-  selector: 'edition-model-event',
-  templateUrl: './template/edition-model-event.html'
+  selector: 'app-edit-event-model',
+  templateUrl: './template/edit-event-model.html'
 
 })
-export class EditionModelEvenementComponent {
+export class EditEventModelComponent {
 
   eventModel: EventModel;
-  simulation: boolean = false;
-  eventModelList: EventModel[];
+  simulation: boolean;
+
 
   constructor(private eventModelService: EventModelService, private communicationEditionEventService: CommunicationEditionEventService) {
     this.eventModel = new EventModel();
-    this.eventModelService.getEventModels().subscribe((eventModels: EventModel[]) => {
-
-      this.eventModelList = eventModels;
-    });
-    this.communicationEditionEventService.simulationSwitch$.subscribe((simulation: boolean) => this.simulation = simulation);
+    this.communicationEditionEventService.simulationSubject.subscribe((simulation: boolean) => this.simulation = simulation);
+    this.communicationEditionEventService.eventModelSubject.subscribe((eventModel: EventModel) => this.eventModel = eventModel);
   }
 
 
   addLine(order: number): void {
-    let lineModel = new LineModel();
-    lineModel.name = 'jj';
+    const lineModel = new LineModel();
+    lineModel.name = '';
     lineModel.input = true;
     lineModel.componentModels = new Array<EventComponentModel>();
     lineModel.order = order + 1;
@@ -38,13 +35,13 @@ export class EditionModelEvenementComponent {
   }
 
   addTitleLine(): void {
-    let lineModel = new LineModel();
+    const lineModel = new LineModel();
     lineModel.name = 'Title';
     lineModel.input = false;
     lineModel.order = this.eventModel.lineModels.length;
     lineModel.componentModels = new Array<EventComponentModel>();
     console.log(lineModel);
-    console.log( this.eventModel.lineModels.length);
+    console.log(this.eventModel.lineModels.length);
     this.eventModel.lineModels.push(lineModel);
     console.log(this.eventModel.lineModels.length);
     console.log('new title ligne');
@@ -57,32 +54,22 @@ export class EditionModelEvenementComponent {
   }
 
   save() {
- /*   if (this.eventModel._id) {
+    if (this.eventModel._id) {
       this.eventModelService.updateEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
         this.eventModel = eventModel;
-        this.simulation = true;
       });
-    } else {*/
+    } else {
       this.eventModelService.createEventModel(this.eventModel).subscribe((eventModel: EventModel) => {
-        this.eventModel = eventModel;
-        this.simulation = true;
+        if (eventModel) {
+          this.eventModel = eventModel;
+        }
       });
-   // }
-  //  this.simulation = true;
+    }
   }
 
   cancel() {
     this.eventModel = new EventModel();
   }
-  setEvent(event: EventModel) {
-    this.eventModel = event;
-  }
-
-  switchSimulation() {
-    this.simulation = !this.simulation;
-    this.communicationEditionEventService.switchSimulation(this.simulation);
-  }
-
   orderLine(line1: LineModel, line2: LineModel): number {
 
     if (line1.order < line2.order) {

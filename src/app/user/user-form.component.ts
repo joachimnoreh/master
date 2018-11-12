@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from './models/user';
 import {UserService} from './services/user.service';
+import {Site} from '../places/models/site';
+import {SiteService} from '../places/services/site.service';
+import {CommunicationUserService} from './services/communication.user.service';
 
 
 @Component({
@@ -15,9 +18,9 @@ export class UserFormComponent implements OnInit {
   userSave: User;
   edit = false;
   submitted = false;
+  private site: Site;
+  constructor(private userService: UserService, private siteService: SiteService, private communicationServiceUser: CommunicationUserService) {
 
-  constructor(private userService: UserService) {
-    console.log(this.user);
   }
 
   createUser(): void {
@@ -30,7 +33,8 @@ export class UserFormComponent implements OnInit {
     } else {
       this.userService.createUser(this.user)
         .subscribe((user: User) => {
-          console.log(user);
+          this.communicationServiceUser.userComponentObservable.next(user);
+
         });
     }
   }
@@ -52,4 +56,5 @@ export class UserFormComponent implements OnInit {
       this.edit = true;
     }
   }
+
 }

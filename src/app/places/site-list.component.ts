@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Site} from './models/site';
 import {SiteService} from './services/site.service';
-import {GlobalService} from '../common/services/global.service';
+import {TypeService} from '../evenement/services/type.service';
+
 import {CommunicationService} from './services/communication.service';
 import {Place} from './models/place';
 
 @Component({
-  selector: 'site-list',
-  templateUrl: './template/site-liste.html'
+  selector: 'app-site-list',
+  templateUrl: './template/sites.html'
 
 })
 export class SiteListComponent implements OnInit {
@@ -19,7 +20,7 @@ export class SiteListComponent implements OnInit {
 
   constructor(
     private siteService: SiteService,
-    private  globalService: GlobalService,
+    private  typeService: TypeService,
     private  communicationService: CommunicationService) {
     communicationService.placeSelected$.subscribe((placeAndLevel: any) => this.onPlaceSelected(placeAndLevel));
   }

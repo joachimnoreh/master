@@ -1,19 +1,16 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
 import {User} from '../models/user';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class CommunicationUserService {
 
   /* Communication entre les composants user-list et userForm */
-  public userForm$: EventEmitter<any>;
-  private user: User;
+  userComponentObservable: Subject<User>;
 
   constructor() {
-    this.userForm$ = new EventEmitter();
+    this.userComponentObservable = new Subject<User>();
   }
 
-  public userAdded(): void {
-    this.userForm$.emit();
-  }
 }

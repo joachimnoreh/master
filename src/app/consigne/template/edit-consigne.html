@@ -1,0 +1,16 @@
+<h3 class="panel-title" i18n>{{consigne._id ? 'Modify':'Create'}}</h3>
+<form #editConsigne="ngForm" (submit)="save()">
+  <div *ngIf="consigne">
+    <div>
+      <input type="text" name="help" class="form-control" [(ngModel)]="consigne.title" required/>
+    </div>
+    <div id="edit-event-model-actions">
+      <button id="create-event-btn" type="submit" class="btn btn-primary" i18n>
+        Save
+      </button>
+      <button id="cancel-event-btn" type="button" class="btn btn-secondary" (click)="cancel()" i18n>
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>

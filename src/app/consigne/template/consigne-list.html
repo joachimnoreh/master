@@ -1,0 +1,9 @@
+<div class="row">
+  <h3 class="panel-title col-xl-9" i18n>Directives</h3>
+</div>
+<div *ngFor="let consigne of consigneList" class="row">
+  <div class="col-xl-10" (click)="setSelectedConsigne(consigne)">{{consigne.title}}</div>
+  <div class="col-xl-1">
+    <i class="fas fa-times remove-component" (click)="deleteConsigne(consigne)"></i>
+  </div>
+</div>

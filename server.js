@@ -39,12 +39,13 @@ files.forEach(file => {
  app[verb.toLowerCase()]('api/'+route,(req,res)=> res.send(require('./mock/'+file)))
 });*/
 
-const lieu = require('./server/mock/wsPlace')(app);
-const site = require('./server/mock/wsSite')(app);
-const users = require('./server/mock/wsUser')(app);
-const roles = require('./server/mock/wsRole')(app);
-const types = require('./server/mock/wsType')(app);
-const eventModel = require('./server/mock/wsEventModel')(app);
+const placeAPI = require('./server/mock/wsPlace')(app);
+const siteAPI = require('./server/mock/wsSite')(app);
+const usersAPI = require('./server/mock/wsUser')(app);
+const directivesAPI = require('./server/mock/wsDirective')(app);
+const rolesAPI = require('./server/mock/wsRole')(app);
+const typesAPI = require('./server/mock/wsType')(app);
+const eventModelAPI = require('./server/mock/wsEventModel')(app);
 
 if(!module.parent) {
   start(app, config);

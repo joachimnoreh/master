@@ -22,7 +22,7 @@ module.exports = function (app) {
   app.userModelSchema.plugin(require('mongoose-autopopulate'));
   app.userModel = mongoose.model('user', app.userModelSchema);
 
-  app.get('/users', function (req, res) {
+  app.get('/seconf/users', function (req, res) {
 
     app.userModel.find(function (err, users) {
       app.checkServerError(res,err);
@@ -30,7 +30,7 @@ module.exports = function (app) {
     });
   });
 
-  app.put('/users', function (req, res) {
+  app.put('/seconf/users', function (req, res) {
     app.checkParams(res,req.body._id, req.body.lastname, req.body.firstname, req.body.matricule, req.body.email);
     app.userModel.findOneAndUpdate(
       {_id: req.body._id},
@@ -42,7 +42,7 @@ module.exports = function (app) {
       });
   });
 
-  app.post('/users', function (req, res) {
+  app.post('/seconf/users', function (req, res) {
     //app.checkParams(res,req.body.lastname, req.body.firstname, req.body.matricule, req.body.email, req.body.site_id);
     app.userModel.create({
       lastname: req.body.lastname,
@@ -56,7 +56,7 @@ module.exports = function (app) {
     });
   });
 
-  app.delete('/users', function (req, res) {
+  app.delete('/seconf/users', function (req, res) {
     app.checkParams(res,req.body._id);
     app.userModel.findOneAndUpdate({_id: req.body._id}, {active: false}, {new: true}, function (err, place) {
       app.checkServerError(res,err);

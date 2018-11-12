@@ -1,0 +1,45 @@
+<div class="panel panel-primary" id="edit-event-model-lines">
+  <div class="panel-heading" id="edit-event-model-name">
+    <h3>
+
+      <input *ngIf="!(simulation)" type="text" class="form-control" title="Nom de l'evenement"
+             placeholder="{{eventModel.name}}" [(ngModel)]="eventModel.name" name="eventTitle"/>
+
+      <label *ngIf="(simulation)">{{eventModel.name}}</label>
+
+    </h3>
+
+  </div>
+  <div class="panel-body">
+    <div *ngFor=" let lineModel of eventModel.lineModels" class="edit-event-model-lines-model-list">
+
+      <div class="col-xl-12">
+
+        <h4 *ngIf="!lineModel.input"><input type="text" class="form-control" [(ngModel)]="lineModel.name"
+                                            name="{{lineModel.name}}"/></h4>
+
+
+        <app-edit-line-model *ngIf="lineModel.input" [lineModel]="lineModel"></app-edit-line-model>
+        <button *ngIf="!(simulation)" type="button" class="col-xl-12  btn btn-default"
+                (click)="addLine(lineModel.order)" i18n>
+          Add input line
+        </button>
+      </div>
+
+    </div>
+    <button *ngIf="!(simulation)" class="col-xl-12  btn btn-default" (click)="addTitleLine()">
+      Add title line
+    </button>
+  </div>
+</div>
+<div id="edit-event-model-actions">
+  <button id="create-event-btn" type="button" class="btn btn-primary" (click)="save()" i18n>
+    Save
+  </button>
+  <button id="cancel-event-btn" type="button" class="btn btn-secondary" (click)="cancel()" i18n>
+    Cancel
+  </button>
+</div>
+
+
+

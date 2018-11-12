@@ -3,7 +3,7 @@ import {EventComponentType} from './eventComponentType';
 export class EventComponentModel {
   _id: string;
   label: string;
-  type: EventComponentType;
+  type: EventComponentType[];
   width: number;
   order: number;
   mandatory: boolean;

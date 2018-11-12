@@ -5,8 +5,8 @@ import {FormBuilder, FormControl, Validators, FormsModule, ReactiveFormsModule} 
 import {PlaceService} from './services/place.service';
 
 @Component({
-  selector: 'place-detail',
-  templateUrl: './template/detail_place.html'
+  selector: 'app-place-detail',
+  templateUrl: './template/show-place-details.html'
 })
 export class PlaceDetailComponent implements OnInit {
 
@@ -46,7 +46,7 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   /* initSelectedPlace(){
-     this.newPlace = new Place('Nouveau lieu',globalService.getSite());
+     this.newPlace = new Place('Nouveau lieu',typeService.getSite());
    }*/
   validateChange() {
     this.placeService.update(this.selectedPlace).subscribe((place: Place) => this.selectedPlace = place);

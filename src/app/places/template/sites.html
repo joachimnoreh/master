@@ -1,0 +1,27 @@
+
+<div class="row">
+  <div class="col-xl-2"></div>
+<div id="place-list-panel" class="col-xl-8">
+  <div class="panel panel-primary">
+   <div class="panel-body">
+      <div *ngIf="site && site.placeRoot">
+        <app-place-detail [level]="0" [selectedPlace]="site.placeRoot"></app-place-detail>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-2" >
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Add item <span *ngIf="selectedPlace">{{selectedPlace.name}}</span></h3>
+    </div>
+    <div class="panel-body">
+      <div *ngIf="selectedPlace">
+        <app-add-places [level]="level" [selectedPlace]="selectedPlace"></app-add-places>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--</ul>-->

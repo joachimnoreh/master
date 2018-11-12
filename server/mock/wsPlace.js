@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 
 module.exports = function (app) {
   app.placeModelSchema = mongoose.Schema({
-    name: 'string',
-    active: 'boolean',
+    name: 'String',
+    active: 'Boolean',
     placeChildren: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'place',
@@ -34,7 +34,7 @@ module.exports = function (app) {
     }
   };
 
-app.get('/places/:place_id', function (req, res) {
+app.get('/seconf/places/:place_id', function (req, res) {
 
   app.checkParams(res,req.params.place_id);
 
@@ -44,7 +44,7 @@ app.get('/places/:place_id', function (req, res) {
   });
 });
 
-app.put('/places', function (req, res) {
+app.put('/seconf/places', function (req, res) {
 
   app.placeModel.findOneAndUpdate({_id: req.body._id}, {name: req.body.name}, {new: true}, function (err, place) {
     app.checkServerError(res,err);
@@ -52,7 +52,7 @@ app.put('/places', function (req, res) {
   });
 });
 
-app.post('/places', function (req, res) {
+app.post('/seconf/places', function (req, res) {
 
   app.checkParams(res,req.body.name);
   app.placeModel.create({

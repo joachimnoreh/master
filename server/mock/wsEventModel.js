@@ -33,21 +33,27 @@ module.exports = function (app) {
         });
       app.eventModel = mongoose.model('eventModel', app.eventModelSchema);
 
-app.get('/eventModel', function(req,res){
+app.get('/seconf/eventModel', function(req,res){
  app.eventModel.find().exec(function (err, eventModels) {
     app.checkServerError(res,err);
     console.log(eventModels);
     res.json(eventModels);
   });
 });
-app.get('/eventModel/:eventModelId', function(req,res){
+app.get('/seconf/eventModel/:eventModelId', function(req,res){
 
  app.eventModel.find({_id : eventModelId },function (err, eventModel) {
     app.checkServerError(res,err);
     res.json(eventModel);
   });
 });
-
+var mapEventModel = function (requestLine){
+   var line = new app.lineModel();
+   line.name = requestLine.name;
+   line.input = requestLine.input;
+   line.order = requestLine.order;
+   return line;
+}
 var mapLineModel = function (requestLine){
    var line = new app.lineModel();
    line.name = requestLine.name;
@@ -55,45 +61,70 @@ var mapLineModel = function (requestLine){
    line.order = requestLine.order;
    return line;
 }
-var mapComponentModel = function (requestLine){
-   var line = new app.lineModel();
-   line.name = requestLine.name;
-   line.input = requestLine.input;
-   line.order = requestLine.order;
-   return line;
+var mapComponentModel = function (requestComponentModel){
+console.log(requestComponentModel.type);
+  var eventComponentM = new app.componentModel();
+  eventComponentM.name= requestComponentModel.name;
+  eventComponentM.width= requestComponentModel.width;
+  eventComponentM.label= requestComponentModel.label;
+  app.typeModel.find({_id:requestComponentModel.type._id},function(err,type){
+          console.log('founded');
+        console.log(type);
+       eventComponentM.type = type;
+  });
+
+  eventComponentM.mandatory = requestComponentModel.mandatory
+  eventComponentM.default_text = requestComponentModel.default_text;
+  eventComponentM.help = requestComponentModel.help;
+  eventComponentM.message = requestComponentModel.message;
+  eventComponentM.order = requestComponentModel.order;
+  return eventComponentM;
 }
 var mapEventComponentModel = function (requestEvent){
-
+ var eventM = new app.eventModel;
+ eventM.name= requestEvent.body.name;
+ for ( var i in requestEvent.body.lineModels){
+            var lineM = mapLineModel(requestEvent.body.lineModels[i]);
+            for ( var j in requestEvent.body.lineModels[i].componentModels){
+               var componentM = mapComponentModel(requestEvent.body.lineModels[i].componentModels[j]);
+               lineM.componentModels.push(componentM);
+            }
+           eventM.lineModels.push(lineM);
+  }
+  return eventM;
 }
 
-app.post('/eventModel', function(req,res){
-var eventM = new app.eventModel;
- eventM.name= req.body.name;
- for ( var i in req.body.lineModels){
-          var lineM = mapLineModel(req.body.lineModels[i]);
-          eventM.lineModels.push(lineM);
- }
-
+app.post('/seconf/eventModel', function(req,res){
+  eventM = mapEventComponentModel(req);
   app.eventModel.create(eventM,function (err, eventModel) {
-  console.log('err='+err);
-  console.log('eventModel='+eventModel);
-    app.checkServerError(res,err);
-    res.json(eventModel);
-  });
-
-
-  });
-app.put('/eventModel', function(req,res){
-var eventM = new app.eventModel;
- eventM.name= req.body.name;
- for ( var i in req.body.lineModels){
-          var lineM = mapLineModel(req.body.lineModels[i]);
-          eventM.lineModels.push(lineM);
- }
-
-  app.eventModel.findOneAndUpdate({_id: req.body._id},req.body,{upsert:true,new:true},function (err, eventModel) {
     app.checkServerError(res,err);
     res.json(eventModel);
   });
 });
+
+app.put('/seconf/eventModel', function(req,res){
+   eventM = mapEventComponentModel(req);
+   console.log("event to be deleted"+ req.body._id);
+   app.eventModel.deleteOne({ _id: req.body._id},function (err) {
+     app.checkServerError(res,err);
+     app.eventModel.create(eventM,function (err, eventModel) {
+         app.checkServerError(res,err);
+         res.json(eventModel);
+       });
+   });
+
+});
+
+app.delete('/seconf/eventModel/:idEventModel', function(req,res){
+   console.log("event to be deleted"+req.params.idEventModel);
+   app.eventModel.deleteOne({ _id:req.params.idEventModel},function (err) {
+     app.checkServerError(res,err);
+     app.eventModel.find(function (err, eventModel) {
+         app.checkServerError(res,err);
+         res.json(eventModel);
+       });
+   });
+
+});
+
 }

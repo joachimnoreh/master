@@ -1,6 +1,41 @@
+$button-primary-bg-color : #026446;
+$button-primary-bg-color-hover :#239170;
+.navMenu{
+  background-color: #174679!important;
+}
 
-
+.btn-primary {
+  background-color: $button-primary-bg-color!important;
+  border-color: $button-primary-bg-color!important;
+}
+.btn-primary:hover {
+  background-color: $button-primary-bg-color-hover!important ;
+  border-color: $button-primary-bg-color-hover!important;
+}
 #headerConfiguration{
 	margin-bottom:10px;
 	
+}
+.btn-outline-secondary{
+  color:#fff;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+
+#closeAlert{
+  float:right;
+}
+
+.btn-secondary {
+  color: #fff!important;
+  background-color: #6c757d!important;
+  border-color: #6c757d!important;
+}
+.fixed-bottom-alert {
+  position: fixed;
+  right: 10px;
+  bottom: 45px;
+  left: 0;
+  z-index: 1000000;
 }

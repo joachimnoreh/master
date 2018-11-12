@@ -6,7 +6,7 @@
   </li>
 </ul>
 <div *ngIf="showPlaceCreation">
-  <place-detail [place]="SelectedPlace"></place-detail>
+  <app-place-detail [place]="SelectedPlace"></app-place-detail>
   <label for="name">name: </label>
   <input [(ngModel)]="newPlace.name" placeholder="name">
 
